@@ -82,7 +82,7 @@ Because the information contained in UDS files (especially unfiltered point clou
 
 _VDKCollider.cs_ contains the majority of the logic associated with the example collider system.
  
-![Collider Object Structure](./docs/colliderSettings.png "Collider Object Structure")
+![Collider Object Structure](./docs/colliderStructure.png "Collider Object Structure")
 
 _Because Unity does not allow collisions between a parent and child object, the collider cannot be a direct decendent of an object it is intended to collide with. 
 Instead use the follow target parameter to keep the collider within an objects reference frame_
@@ -113,3 +113,18 @@ Smoothing on (note that tree branches are no longer captured by the collision mo
 ![Smoothed](./docs/ColliderFiltered.png "Smoothed Collision Polygon")
 
 As the attached mesh is modified often by this script, baking options for the mesh collider should be turned off for performance reasons
+
+## Known Issues
+
+### Postprocessing bug on initial import
+NullReferenceException: Object reference not set to an instance of an object
+UnityEngine.Rendering.PostProcessing.AmbientOcclusion.IsEnabledAndSupported (UnityEngine.Rendering.PostProcessing.PostProcessRenderContext context) (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/Effects/AmbientOcclusion.cs:182)
+UnityEngine.Rendering.PostProcessing.PostProcessLayer.SetLegacyCameraFlags (UnityEngine.Rendering.PostProcessing.PostProcessRenderContext context) (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:771)
+UnityEngine.Rendering.PostProcessing.PostProcessLayer.SetupContext (UnityEngine.Rendering.PostProcessing.PostProcessRenderContext context) (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:863)
+UnityEngine.Rendering.PostProcessing.PostProcessLayer.BuildCommandBuffers () (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:533)
+UnityEngine.Rendering.PostProcessing.PostProcessLayer.OnPreCull () (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:462)
+UnityEngine.GUIUtility:ProcessEvent(Int32, IntPtr)
+
+This occurs as a result of a bug in the postprocessing package, the solution is to remove the postprocessing layer from the
+camera(s) and re add it with the same settings as provided. 
+

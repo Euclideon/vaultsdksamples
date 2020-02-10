@@ -14,6 +14,7 @@
 *.filters
 
 *Makefile
+<<<<<<< Updated upstream
 
 integrations/unity-csharp/Library/
 
@@ -32,3 +33,7 @@ integrations/unity-csharp/Temp/
 languages/cpp/vaultSDK.dll
 
 languages/cpp/vaultSDK.lib
+=======
+/integrations/unity-csharp/Assets/VDK/vaultSDK.dll
+/integrations/unity-csharp/Assets/VDK/vaultSDK.lib
+>>>>>>> Stashed changes

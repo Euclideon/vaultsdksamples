@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -41,7 +41,8 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
     }
   }
 
-  private void InitialiseTextures() {
+  private void InitialiseTextures()
+  {
       if(colourTexture==null)
         colourTexture = new Texture2D(width, height, TextureFormat.BGRA32, false);
       
@@ -49,16 +50,18 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
         depthTexture = new Texture2D(width, height, TextureFormat.RFloat, false);
 
   }
-  private void InitialiseBuffers(int newWidth,int newHeight) {
+  private void InitialiseBuffers(int newWidth,int newHeight)
+  {
     width = newWidth;
     height = newHeight;
     colourBuffer = new Color32[width * height];
     depthBuffer = new float[width * height];
-
   }
 
   public override void Release()
   {
+
+    //These should be handled by the destructors in the API when out of scope now:
     //vRenderer.Destroy();
     //vRenderView.Destroy();
   }
@@ -85,6 +88,7 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
 
     if (!GlobalVDKContext.isCreated)
       return;
+
     if (context.width != width || context.height != height)
       RebuildBuffers(context.width, context.height);
 
@@ -114,3 +118,4 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
     }
   }
 }
+

@@ -1,10 +1,10 @@
-﻿Shader "Hidden/VDK/VDKShader"
+Shader "Hidden/VDK/VDKShader"
 {
   HLSLINCLUDE
 
 #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
 
-  Texture2D _MainTex;
+    Texture2D _MainTex;
   sampler2D _CameraDepthTexture;
 
   Texture2D _udCol;
@@ -46,7 +46,7 @@
 
   ENDHLSL
 
-  SubShader
+    SubShader
   {
     Cull Off ZWrite On ZTest Always
 
