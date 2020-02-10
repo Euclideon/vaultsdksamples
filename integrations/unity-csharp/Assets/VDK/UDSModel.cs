@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +24,20 @@ public class UDSModel : MonoBehaviour
   vdkPointCloudHeader UDSHeader = new vdkPointCloudHeader();
 
   public bool geoLocate = false; //determines if the model should be located in the position in real space
-
-
   public string path = "";
+
+  public string Path {
+    get { return path; }
+    set
+    {
+      path = value;
+      if (isLoaded == true)
+        udModel.Unload();
+
+      isLoaded = false;
+        
+     }
+  }
 
   void Start()
   {
@@ -35,14 +46,14 @@ public class UDSModel : MonoBehaviour
   // This gets called by VDKPPES if it isn't loaded already
   public void LoadModel()
   {
-    if (!GlobalVDKContext.isCreated || isLoaded || path == "")
+    if (!GlobalVDKContext.isCreated || isLoaded || Path == "" ||Path ==null)
       return;
 
     try
     {
-      udModel.Load(GlobalVDKContext.vContext, path, ref UDSHeader);
-      pivotTranslation = Matrix4x4.Translate(new Vector3((float)UDSHeader.pivot[0], (float)UDSHeader.pivot[1], (float)UDSHeader.pivot[2]));
-      modelScale = Matrix4x4.Scale(new Vector3((float)UDSHeader.scaledRange,(float)UDSHeader.scaledRange,(float)UDSHeader.scaledRange));
+      udModel.Load(GlobalVDKContext.vContext, Path, ref UDSHeader);
+      pivotTranslation = Matrix4x4.Translate(new Vector3((float)UDSHeader.pivot[0], (float)UDSHeader.pivot[1], (float)UDSHeader.pivot[2]) );
+      modelScale = Matrix4x4.Scale(new Vector3( (float)UDSHeader.scaledRange, (float)UDSHeader.scaledRange, (float)UDSHeader.scaledRange) );
       scaledRange= UDSHeader.scaledRange;
       centreLocation=UDSHeader.boundingBoxCenter;
       baseOffset=UDSHeader.baseOffset;
@@ -51,7 +62,7 @@ public class UDSModel : MonoBehaviour
     }
     catch(System.Exception e)
     {
-      Debug.LogError("Could not open UDS: " + path+" "+ e.Message);
+      Debug.LogError("Could not open UDS: " + Path+" "+ e.Message);
     }
   }
 }

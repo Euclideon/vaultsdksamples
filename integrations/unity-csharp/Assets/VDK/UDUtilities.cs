@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Vault
 {
@@ -59,7 +60,7 @@ namespace Vault
         count++;
       }
     }
-    return modelArray;
+    return modelArray.Where(m => (m.pointCloud!= System.IntPtr.Zero) ).ToArray();
     }
   }
 
