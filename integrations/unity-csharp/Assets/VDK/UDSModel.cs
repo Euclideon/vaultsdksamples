@@ -36,7 +36,6 @@ public class UDSModel : MonoBehaviour
                 udModel.Unload();
 
             isLoaded = false;
-
         }
     }
 

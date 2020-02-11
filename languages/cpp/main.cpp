@@ -82,9 +82,9 @@ bool Render(std::string inputPath, Vault::Context &context)
 int main(int argc, char **ppArgv)
 {
   std::string serverPath = "https://earth.vault.euclideon.com";
-  std::string username = "bwockner";
-  std::string password = "bradensVaultPassword";
-  std::string modelName = "Y:\Brisbane_30cm.uds";
+  std::string username = "Username";
+  std::string password = "Password";
+  std::string modelName = "DirCube.uds";
 
   for (int i = 0; i < argc; ++i)
   {
@@ -101,8 +101,7 @@ int main(int argc, char **ppArgv)
   Vault::Context context(serverPath, "C++ Sample", username, password);
 
   bool vRender = Render(modelName, context);
-  //bool vConvert = Convert(modelName, modelName + ".uds", context);
-  bool vConvert = false;
+  bool vConvert = Convert(modelName, modelName + ".uds", context);
 
   return ((vRender && vConvert) ? 0 : 1);
 }

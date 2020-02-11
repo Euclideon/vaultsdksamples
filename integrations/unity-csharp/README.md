@@ -70,13 +70,10 @@ and login information between objects, and a [vdkRenderContext](), enabling the 
 
 _VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect.
 
-
 ### VDK Collider
 
 This object demonstrates how to achieve physical collisions between Euclideon UDS models and native Unity colliders. Because of the potential scale of UDS objects it is not practical to construct mesh colliders of UDS objects (espeially if these objects are being streamed externally)
 The approach taken is to construct a mesh of the UDS object local to a point of interest (for example a player or the potential colliding object using information available from an instance of [vdkRenderView](). 
-
-
 
 Because the information contained in UDS files (especially unfiltered point clouds) can be noisy, we have included functionality to smooth the generated surfaces.
 
@@ -104,7 +101,6 @@ _Width Pix, Height Pix:_ The number of pixels used to find the position of the v
 These values have a large impact on frame rate and should be kept as low as possible. Increasing these improves the accuracy of the produced collision mesh.
 
 _Laplacian Smoothing:_ This determines if smoothing should be applied to the collider, this has the effect of removing noise from laser scans at the cost of potentially removing 'sharp' features from the collision mesh.
-
 
 Smoothing off (note the rougher ground surface due to sensor noise):
 ![UnSmoothed](./docs/ColliderUnfiltered.png "Unsmoothed Collision Polygon") 
