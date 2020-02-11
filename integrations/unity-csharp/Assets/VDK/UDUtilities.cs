@@ -12,28 +12,28 @@ namespace Vault
         {
             double[] udMat =
             {
-        unityMat.m00,
-        unityMat.m10,
-        unityMat.m20,
-        unityMat.m30,
+            unityMat.m00,
+            unityMat.m10,
+            unityMat.m20,
+            unityMat.m30,
 
-        unityMat.m01,
-        unityMat.m11,
-        unityMat.m21,
-        unityMat.m31,
+            unityMat.m01,
+            unityMat.m11,
+            unityMat.m21,
+            unityMat.m31,
 
-        unityMat.m02,
-        unityMat.m12,
-        unityMat.m22,
-        unityMat.m32,
+            unityMat.m02,
+            unityMat.m12,
+            unityMat.m22,
+            unityMat.m32,
 
-        unityMat.m03,
-        unityMat.m13,
-        unityMat.m23,
-        unityMat.m33
-      };
+            unityMat.m03,
+            unityMat.m13,
+            unityMat.m23,
+            unityMat.m33
+            };
 
-            return udMat;
+         return udMat;
         }
 
         /*
@@ -41,11 +41,9 @@ namespace Vault
          */
         public static vdkRenderInstance[] getUDSInstances()
         {
-
             GameObject[] objects = GameObject.FindGameObjectsWithTag("UDSModel");
             int count = 0;
             vdkRenderInstance[] modelArray = new vdkRenderInstance[objects.Length];
-
             for (int i = 0; i < objects.Length; ++i)
             {
                 Component component = objects[i].GetComponent("UDSModel");

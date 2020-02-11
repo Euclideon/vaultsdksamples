@@ -30,16 +30,23 @@ There are two projects included:
 Both examples are tested with Unity 2019.3.0f6, all steps must be repeated for each package in their respective directories.
 
 1. Download and extract VDK 0.5.0 package from [here](https://earth.vault.euclideon.com) using your license credentials (if you do not have one, free trials are available from [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code) )
-2. Download the Unity VDK example from [here]()
-3. Copy the files from Euclideon_vdk0.5.0/lib/(_your operating system here_)/to Assets/VDK in your Unity project
-4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details **YOUR UNITY EDITOR MAY CRASH ON LOAD IF THIS STEP IS NOT COMPLETED**
-5. Open Unity Hub, Select Add and specify the downloaded project as the source folder
+2. Download the Unity VDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
+3. Copy the files from _Euclideon_vdk0.5.0/lib/(_your operating system here_)/_ to _vaultsdksamples/integrations/unity-csharp/Assets/VDK in your Unity project
+4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details 
+5. Open Unity Hub, Select Add and specify the  project as the source folder
 6. Open Window \-> package manager \-> Post Processing \-> update (ensure that postprocessing packages are installed and up to date, \>v2.3.0)
 7. Open the sample scene from the project, (Scenes/SampleScene in the project expolrer) press play to fly the camera in the chose scene using game view. Refer to known issues if the game does not run
 
 ### Changing UDS model
 
 The UDS can be changed by modifying the path attribute of the Model object in the project hierarchy (by default on the left of the screen) using the inspector (by default on the right)
+
+There are two UDS models provided for demonstration purposes, these can be copied and pasted into the _path_ of the US model object:
+
+Photogrammetry model of the Gold Coast by [Aerometrex](https://aerometrex.com.au/):
+
+https://models003vault.oss-ap-southeast-2.aliyuncs.com/GoldCoast_20mm.uds
+
 
 
 ## Basic Example
@@ -57,7 +64,6 @@ the implemented post process layer and volume properties which must be included 
 
 ![Sample UDS camera Settings](./docs/sampleCameraSettings.png "Sample UDS Camera Settings")
 
-
 ### UDS Model
 
 Each of UDS to be loaded in unity is represented as a one of these models.
@@ -71,13 +77,10 @@ and login information between objects, and a ```vdkRenderContext```, enabling th
 
 _VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect. The associated shader is located in __
 
-
 ### VDK Collider
 
 This object demonstrates how to achieve physical collisions between Euclideon UDS models and native Unity colliders. Because of the potential scale of UDS objects it is not practical to construct mesh colliders of UDS objects (espeially if these objects are being streamed externally)
-The approach taken is to construct a mesh of the UDS object local to a point of interest (for example a player or the potential colliding object using information available from an instance of [vdkRenderView](). 
-
-
+The approach taken is to construct a mesh of the UDS object local to a point of interest (for example a player or the potential colliding object using information available from an instance of ```vdkRenderView```. 
 
 Because the information contained in UDS files (especially unfiltered point clouds) can be noisy, we have included functionality to smooth the generated surfaces.
 
@@ -105,7 +108,6 @@ _Width Pix, Height Pix:_ The number of pixels used to find the position of the v
 These values have a large impact on frame rate and should be kept as low as possible. Increasing these improves the accuracy of the produced collision mesh.
 
 _Laplacian Smoothing:_ This determines if smoothing should be applied to the collider, this has the effect of removing noise from laser scans at the cost of potentially removing 'sharp' features from the collision mesh.
-
 
 Smoothing off (note the rougher ground surface due to sensor noise):
 ![UnSmoothed](./docs/ColliderUnfiltered.png "Unsmoothed Collision Polygon") 
