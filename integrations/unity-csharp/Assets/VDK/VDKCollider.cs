@@ -45,9 +45,14 @@ public class VDKCollider : MonoBehaviour
     public float[] depthBuffer;
     private Color32[] colourBuffer;
 
-    void Start()
+    void Awake()
     {
         SetRenderView();
+        Update();
+        
+    }
+    void Start()
+    {
     }
 
     /*
@@ -255,20 +260,21 @@ public class VDKCollider : MonoBehaviour
         //this reduces the number of updates to the mesh required.
         if (followTarget != null)
         {
+            Vector3 offset = Matrix4x4.Rotate(followTarget.transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
             if (threshholdFollow)
             {
                 if ((this.transform.position - followTarget.transform.position).magnitude > followThreshold)
                 {
-                    this.transform.position = followTarget.transform.position + watcherPos;
+                    this.transform.position = followTarget.transform.position + offset;
                     UpdateView();
-                    //this.transform.rotation = followTarget.transform.rotation;
+                    this.transform.rotation = followTarget.transform.rotation;
                 }
             }
             else
             {
-                this.transform.position = followTarget.transform.position + watcherPos;//+followTarget.transform.TransformVector(watcherPos);
+                this.transform.position = followTarget.transform.position + offset;//+followTarget.transform.TransformVector(watcherPos);
                 UpdateView();
-                //this.transform.rotation = followTarget.transform.rotation;
+                this.transform.rotation = followTarget.transform.rotation;
             }
 
         }
