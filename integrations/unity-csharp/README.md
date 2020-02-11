@@ -20,7 +20,7 @@ Unity Postprocessing >=v2.3.0
 <!-- TODO: Explain how this sample can be used and what is required to get it running -->
 There are two projects included:
 
-* The basic package, including a basic flight camera and collider, this demonstrates the basic concepts required to get simulations and games using VDK running in unity. This is ideal for developers wishing to use VDK with their own projects
+* This is the basic project, including a basic flight camera and collider, this demonstrates the basic concepts required to get simulations and games using VDK running in unity. This is ideal for developers wishing to use VDK with their own projects
 * The advanced project: includes a driving simulator and third person ragdoll. This demonstrates use of VDK with Unity physics and is good for exploring and testing interactions of unity systems with Unlimited Detail point clouds.
 
 **Both examples require a valid license for Euclideon Vault SDK, trial licenses can be obtained [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code)** 
@@ -30,14 +30,22 @@ There are two projects included:
 Both examples are tested with Unity 2019.3.0f6, all steps must be repeated for each package in their respective directories.
 
 1. Download and extract VDK 0.5.0 package from [here](https://earth.vault.euclideon.com) using your license credentials (if you do not have one, free trials are available from [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code) )
-2. Download the Unity VDK example from [here]()
-3. Copy the files from Euclideon_vdk0.5.0/lib/(_your operating system here_)/to Assets/VDK in your Unity project
-4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details **YOUR UNITY EDITOR MAY CRASH ON LOAD IF THIS STEP IS NOT COMPLETED**
-5. Open Unity Hub, Select Add and specify the downloaded project as the source folder
-6. Open Window \-> package manager \-> Post Processing \-> update (ensure that postprocessing packages are installed and up to date, \>)
+2. Download the Unity VDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
+3. Copy the files from _Euclideon_vdk0.5.0/lib/(_your operating system here_)/_ to _vaultsdksamples/integrations/unity-csharp/Assets/VDK in your Unity project
+4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details 
+5. Open Unity Hub, Select Add and specify the  project as the source folder
+6. Open Window \-> package manager \-> Post Processing \-> update (ensure that postprocessing packages are installed and up to date, \>v2.3.0)
+7. Open the sample scene from the project, (Scenes/SampleScene in the project expolrer) press play to fly the camera in the chose scene using game view. Refer to known issues if the game does not run
 
+### Changing UDS model
 
+The UDS can be changed by modifying the path attribute of the Model object in the project hierarchy (by default on the left of the screen) using the inspector (by default on the right)
 
+There are two UDS models provided for demonstration purposes, these can be copied and pasted into the _path_ of the US model object:
+
+Photogrammetry model of the Gold Coast by [Aerometrex](https://aerometrex.com.au/):
+
+https://models003vault.oss-ap-southeast-2.aliyuncs.com/GoldCoast_20mm.uds
 
 
 
@@ -56,24 +64,23 @@ the implemented post process layer and volume properties which must be included 
 
 ![Sample UDS camera Settings](./docs/sampleCameraSettings.png "Sample UDS Camera Settings")
 
-
 ### UDS Model
 
 Each of UDS to be loaded in unity is represented as a one of these models.
 
 ### vdkLogin
 
-This file contains the login logic for the unity example, including login credentials. GlobalVDKContext contains a [vdkContext]() for managing licensing 
-and login information between objects, and a [vdkRenderContext](), enabling the rendering of and caching the UDS model information
+This file contains the login logic for the unity example, including login credentials. GlobalVDKContext contains a ``` vdkContext``` for managing licensing 
+and login information between objects, and a ```vdkRenderContext```, enabling the rendering of and caching the UDS model information
 
 ### VDKPPER 
 
-_VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect.
+_VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect. The associated shader is located in __
 
 ### VDK Collider
 
 This object demonstrates how to achieve physical collisions between Euclideon UDS models and native Unity colliders. Because of the potential scale of UDS objects it is not practical to construct mesh colliders of UDS objects (espeially if these objects are being streamed externally)
-The approach taken is to construct a mesh of the UDS object local to a point of interest (for example a player or the potential colliding object using information available from an instance of [vdkRenderView](). 
+The approach taken is to construct a mesh of the UDS object local to a point of interest (for example a player or the potential colliding object using information available from an instance of ```vdkRenderView```. 
 
 Because the information contained in UDS files (especially unfiltered point clouds) can be noisy, we have included functionality to smooth the generated surfaces.
 
@@ -113,6 +120,7 @@ As the attached mesh is modified often by this script, baking options for the me
 ## Known Issues
 
 ### Postprocessing bug on initial import
+```C#
 NullReferenceException: Object reference not set to an instance of an object
 UnityEngine.Rendering.PostProcessing.AmbientOcclusion.IsEnabledAndSupported (UnityEngine.Rendering.PostProcessing.PostProcessRenderContext context) (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/Effects/AmbientOcclusion.cs:182)
 UnityEngine.Rendering.PostProcessing.PostProcessLayer.SetLegacyCameraFlags (UnityEngine.Rendering.PostProcessing.PostProcessRenderContext context) (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:771)
@@ -120,6 +128,7 @@ UnityEngine.Rendering.PostProcessing.PostProcessLayer.SetupContext (UnityEngine.
 UnityEngine.Rendering.PostProcessing.PostProcessLayer.BuildCommandBuffers () (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:533)
 UnityEngine.Rendering.PostProcessing.PostProcessLayer.OnPreCull () (at Library/PackageCache/com.unity.postprocessing@2.3.0/PostProcessing/Runtime/PostProcessLayer.cs:462)
 UnityEngine.GUIUtility:ProcessEvent(Int32, IntPtr)
+```
 
 This occurs as a result of a bug in the postprocessing package, the solution is to remove the postprocessing layer from the
 camera(s) and re add it with the same settings as provided. 
