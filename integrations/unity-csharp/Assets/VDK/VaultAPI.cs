@@ -260,8 +260,17 @@ namespace Vault
                 throw new Exception("VDK License Error: " + error.ToString());
         }
 
+        public void RenewLicense(LicenseType type)
+        {
+            vdkError error = vdkContext_RenewLicense(pContext, type);
+            if (error != Vault.vdkError.vE_Success)
+                throw new Exception("VDK License Error: " + error.ToString());
+        }
+
         public IntPtr pContext = IntPtr.Zero;
 
+        [DllImport("vaultSDK")]
+        private static extern vdkError vdkContext_RenewLicense(IntPtr pContext, LicenseType type);
         [DllImport("vaultSDK")]
         private static extern vdkError vdkContext_TryResume(ref IntPtr ppContext, string pURL, string pApplicationName, string pUsername, bool tryDongle);
         [DllImport("vaultSDK")]
@@ -325,6 +334,7 @@ namespace Vault
             vdkError error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr.Zero));
             if (error == vdkError.vE_InvalidLicense)
             {
+
                 context.RequestLicense(LicenseType.Render);
                 error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr)0);
             }

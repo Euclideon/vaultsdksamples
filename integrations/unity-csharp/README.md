@@ -21,7 +21,7 @@ Unity Postprocessing >=v2.3.0
 There are two projects included:
 
 * This is the basic project, including a basic flight camera and collider, this demonstrates the basic concepts required to get simulations and games using VDK running in unity. This is ideal for developers wishing to use VDK with their own projects
-* The advanced project: includes a driving simulator and third person ragdoll. This demonstrates use of VDK with Unity physics and is good for exploring and testing interactions of unity systems with Unlimited Detail point clouds.
+* There is also an advanced project: including a driving simulator and third person ragdoll. This demonstrates use of VDK with Unity physics and is good for exploring and testing interactions of unity systems with Unlimited Detail point clouds.
 
 **Both examples require a valid license for Euclideon Vault SDK, trial licenses can be obtained [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code)** 
 
@@ -41,13 +41,13 @@ Both examples are tested with Unity 2019.3.0f6, all steps must be repeated for e
 
 The UDS can be changed by modifying the path attribute of the Model object in the project hierarchy (by default on the left of the screen) using the inspector (by default on the right)
 
-There are two UDS models provided for demonstration purposes, these can be copied and pasted into the _path_ of the US model object:
+There is a UDS model included with this example for demonstration purposes, paths to your own model can be pasted into the _path_ field of the US model object
+UDS file format developed by Euclideon allowing streamable, unlimited sized 3D datasets requiring only low spec hardware. 
 
-Photogrammetry model of the Gold Coast by [Aerometrex](https://aerometrex.com.au/):
+Models can be created from most common photogrammetry and LiDAR point clouds file formats using Euclideon [Vault Client](https://www.euclideon.com/vault/) available [Here](https://earth.vault.euclideon.com) your vault SDK trial license also gives you access to vault client during your trial period.
+You can read about the conversion process [here](https://www.euclideon.com/wp-content/uploads/2019/10/2019_10_31-Vault-Conversion-Guide-v1.2.pdf) if you have any questions check the [support knowledge base](https://www.euclideon.com/customerresourcepage/) or email support@euclideon.com
 
-https://models003vault.oss-ap-southeast-2.aliyuncs.com/GoldCoast_20mm.uds
-
-
+Photogrammetry model of the Gold Coast courtesy of [Aerometrex](https://aerometrex.com.au/)
 
 ## Basic Example
 
@@ -75,7 +75,7 @@ and login information between objects, and a ```vdkRenderContext```, enabling th
 
 ### VDKPPER 
 
-_VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect. The associated shader is located in __
+_VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect. The associated shader is ```vdkShader.shader```
 
 ### VDK Collider
 
