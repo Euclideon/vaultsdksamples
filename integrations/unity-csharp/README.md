@@ -33,9 +33,9 @@ Both examples are tested with Unity 2019.3.0f6, all steps must be repeated for e
 2. Download the Unity VDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
 3. Copy the files from _Euclideon_vdk0.5.0/lib/(_your operating system here_)/_ to _vaultsdksamples/integrations/unity-csharp/Assets/VDK in your Unity project
 4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details 
-5. Open Unity Hub, Select Add and specify the  project as the source folder
+5. Open Unity Hub, Select Add and specify the  project as the source folder; select the unity version next to the project name; click on the project name
 6. Open Window \-> package manager \-> Post Processing \-> update (ensure that postprocessing packages are installed and up to date, \>v2.3.0)
-7. Open the sample scene from the project, (Scenes/SampleScene in the project expolrer) press play to fly the camera in the chose scene using game view. Refer to known issues if the game does not run
+7. Open the sample scene from the project, (Scenes/SampleScene in the project expolorer) press play to fly the camera in the chose scene using game view. Refer to known issues if the game does not run
 
 ### Changing UDS model
 
