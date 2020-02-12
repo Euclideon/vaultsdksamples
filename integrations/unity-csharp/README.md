@@ -1,8 +1,7 @@
 # VDK Unity
 
-This project demonstrates the use of Euclideon Vault developer Kit (VDK) with the Unity game engine. 
+This project demonstrates the use of Euclideon Vault developer Kit (VDK) with the Unity Real Time Development Platform. 
 
-<!-- TODO: Fill this section below with metadata about this sample-->
 ```
 Language:              C#
 Type:                  Integration
