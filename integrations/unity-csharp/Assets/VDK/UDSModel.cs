@@ -21,7 +21,7 @@ public class UDSModel : MonoBehaviour
     [System.NonSerialized]
     public double[] baseOffset;
 
-    vdkPointCloudHeader UDSHeader = new vdkPointCloudHeader();
+    public vdkPointCloudHeader header = new vdkPointCloudHeader();
 
     public bool geoLocate = false; //determines if the model should be located in the position in real space
     public string path = "";
@@ -51,12 +51,12 @@ public class UDSModel : MonoBehaviour
 
         try
         {
-            udModel.Load(GlobalVDKContext.vContext, Path, ref UDSHeader);
-            pivotTranslation = Matrix4x4.Translate(new Vector3((float)UDSHeader.pivot[0], (float)UDSHeader.pivot[1], (float)UDSHeader.pivot[2]));
-            modelScale = Matrix4x4.Scale(new Vector3((float)UDSHeader.scaledRange, (float)UDSHeader.scaledRange, (float)UDSHeader.scaledRange));
-            scaledRange = UDSHeader.scaledRange;
-            centreLocation = UDSHeader.boundingBoxCenter;
-            baseOffset = UDSHeader.baseOffset;
+            udModel.Load(GlobalVDKContext.vContext, Path, ref header);
+            pivotTranslation = Matrix4x4.Translate(new Vector3((float)header.pivot[0], (float)header.pivot[1], (float)header.pivot[2]));
+            modelScale = Matrix4x4.Scale(new Vector3((float)header.scaledRange, (float)header.scaledRange, (float)header.scaledRange));
+            scaledRange = header.scaledRange;
+            centreLocation = header.boundingBoxCenter;
+            baseOffset = header.baseOffset;
 
             isLoaded = true;
         }
