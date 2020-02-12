@@ -36,6 +36,9 @@ public class VDKCollider : MonoBehaviour
     public int heightPix = 50;
     [Tooltip("Turns on smoothing of collider surface")]
     public bool laplacianSmoothing = false;
+    [Tooltip("Determines if the collider rotates with the body of the target object")]
+    public bool lockRotationToBody = false;
+
     public float[] depthBuffer;
     private Color32[] colourBuffer;
     void Awake()
@@ -252,23 +255,30 @@ public class VDKCollider : MonoBehaviour
         //code to follow a target around:
         //if we are following a target, we only update the corresponding mesh whne the object has moved a requisite distance,
         //this reduces the number of updates to the mesh required.
+        Vector3 offset;
         if (followTarget != null)
         {
-            Vector3 offset = Matrix4x4.Rotate(followTarget.transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
+            if (lockRotationToBody)
+                offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
+            else
+                offset = Matrix4x4.Rotate(followTarget.transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
+
             if (threshholdFollow)
             {
                 if ((this.transform.position - followTarget.transform.position).magnitude > followThreshold)
                 {
                     this.transform.position = followTarget.transform.position + offset;
                     UpdateView();
-                    this.transform.rotation = followTarget.transform.rotation;
+                    if(lockRotationToBody)
+                      this.transform.rotation = followTarget.transform.rotation;
                 }
             }
             else
             {
                 this.transform.position = followTarget.transform.position + offset;//+followTarget.transform.TransformVector(watcherPos);
                 UpdateView();
-                this.transform.rotation = followTarget.transform.rotation;
+                if(lockRotationToBody)
+                  this.transform.rotation = followTarget.transform.rotation;
             }
         }
         else
