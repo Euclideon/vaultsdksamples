@@ -222,7 +222,6 @@ namespace Vault
 
         public void KeepAlive()
         {
-
             vdkError error = vdkContext_KeepAlive(pContext);
             if (error != vdkError.vE_Success)
             {
@@ -288,6 +287,7 @@ namespace Vault
     public class vdkRenderContext
     {
         public IntPtr pRenderer = IntPtr.Zero;
+
         private vdkContext context;
         ~vdkRenderContext()
         {
@@ -297,11 +297,11 @@ namespace Vault
         {
             //ensure we destroy the existing context if we are creating a new one:
             if (pRenderer != IntPtr.Zero)
-            {
                 Destroy();
-            }
+
             if (context.pContext == IntPtr.Zero)
                 throw new Exception("context not instantiatiated");
+
             vdkError error = vdkRenderContext_Create(context.pContext, ref pRenderer);
             if (error != Vault.vdkError.vE_Success)
                 throw new Exception("vdkRenderContext.Create failed: " + error.ToString());
@@ -318,6 +318,7 @@ namespace Vault
             vdkError error = vdkRenderContext_Destroy(ref pRenderer);
             if (error != Vault.vdkError.vE_Success)
                 throw new Exception("vdkRenderContext.Destroy failed: " + error.ToString());
+
             pRenderer = IntPtr.Zero;
         }
 
@@ -325,26 +326,27 @@ namespace Vault
         {
             if (modelCount == 0)
                 return;
+
             if (renderView == null)
                 throw new Exception("renderView is null");
+
             if (renderView.pRenderView == IntPtr.Zero)
                 throw new Exception("RenderView not initialised");
+
             if (pRenderer == IntPtr.Zero)
                 throw new Exception("renderContext not initialised");
+
             vdkError error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr.Zero));
             if (error == vdkError.vE_InvalidLicense)
             {
-
                 context.RequestLicense(LicenseType.Render);
                 error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr)0);
             }
+
             if (error != Vault.vdkError.vE_Success)
-            {
                 throw new Exception("vdkRenderContext.Render failed: " + error.ToString());
-            }
+
         }
-
-
 
         [DllImport("vaultSDK")]
         private static extern vdkError vdkRenderContext_Create(IntPtr pContext, ref IntPtr ppRenderer);
@@ -365,8 +367,10 @@ namespace Vault
         {
             if (context.pContext == IntPtr.Zero)
                 throw new Exception("context not instatiated");
+
             if (renderer.pRenderer == IntPtr.Zero)
                 throw new Exception("renderer not instatiated");
+
             vdkError error = vdkRenderView_Create(context.pContext, ref pRenderView, renderer.pRenderer, width, height);
             if (error != Vault.vdkError.vE_Success)
                 throw new Exception("vdkRenderView.Create failed: " + error.ToString());
@@ -384,6 +388,7 @@ namespace Vault
             vdkError error = vdkRenderView_Destroy(ref pRenderView);
             if (error != Vault.vdkError.vE_Success)
                 throw new Exception("vdkRenderView.Destroy failed.");
+
             pRenderView = IntPtr.Zero;
         }
 
@@ -391,6 +396,7 @@ namespace Vault
         {
             if (colorBufferHandle.IsAllocated)
                 colorBufferHandle.Free();
+
             if (depthBufferHandle.IsAllocated)
                 depthBufferHandle.Free();
 
