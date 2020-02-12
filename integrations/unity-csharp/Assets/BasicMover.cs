@@ -7,12 +7,6 @@ public class BasicMover : MonoBehaviour
     public float UpAndDownAmount = 0.0F;
     public Vector3 YPRPerSecond = new Vector3(0.0F, 0.0F, 0.0F);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

@@ -39,10 +39,6 @@ public class UDSModel : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-    }
-
     // This gets called by VDKPPES if it isn't loaded already
     public void LoadModel()
     {
@@ -54,10 +50,6 @@ public class UDSModel : MonoBehaviour
             udModel.Load(GlobalVDKContext.vContext, Path, ref header);
             pivotTranslation = Matrix4x4.Translate(new Vector3((float)header.pivot[0], (float)header.pivot[1], (float)header.pivot[2]));
             modelScale = Matrix4x4.Scale(new Vector3((float)header.scaledRange, (float)header.scaledRange, (float)header.scaledRange));
-            scaledRange = header.scaledRange;
-            centreLocation = header.boundingBoxCenter;
-            baseOffset = header.baseOffset;
-
             isLoaded = true;
         }
         catch (System.Exception e)

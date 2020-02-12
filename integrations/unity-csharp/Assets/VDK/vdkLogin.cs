@@ -19,16 +19,15 @@ namespace Vault
             {
                 try
                 {
-                    Debug.Log("Attempting to resume Euclideon vault session");
+                    Debug.Log("Attempting to resume Euclideon Vault session");
                     vContext.Try_Resume(vaultServer, "Unity", vaultUsername, true);
-
                     vContext.RequestLicense(LicenseType.Render);
                     isCreated = true;
-                    Debug.Log("resume succeeded");
+                    Debug.Log("Resume Succeeded");
                 }
                 catch (System.Exception e)
                 {
-                    Debug.Log(e.ToString() + "Logging in to vault server");
+                    Debug.Log(e.ToString() + "Logging in to Euclideon Vault server");
                     GlobalVDKContext.vContext.Connect(vaultServer, "Unity", vaultUsername, vaultPassword);
                     vContext.RequestLicense(LicenseType.Render);
                     GlobalVDKContext.isCreated = true;
