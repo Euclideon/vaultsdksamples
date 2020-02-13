@@ -11,8 +11,8 @@ namespace Vault
         public static vdkContext vContext = new vdkContext();
         public static vdkRenderContext renderer = new vdkRenderContext();
         public static string vaultServer = "https://earth.vault.euclideon.com";
-    public static string vaultUsername = "";
-    public static string vaultPassword = "";
+        public static string vaultUsername = "";
+        public static string vaultPassword = "";
         public static void Login()
         {
             if (!GlobalVDKContext.isCreated)
