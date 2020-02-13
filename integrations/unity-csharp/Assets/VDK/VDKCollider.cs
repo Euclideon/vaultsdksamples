@@ -37,7 +37,14 @@ public class VDKCollider : MonoBehaviour
     [Tooltip("Turns on smoothing of collider surface")]
     public bool laplacianSmoothing = false;
     [Tooltip("Determines if the collider rotates with the body of the target object")]
-    public bool lockRotationToBody = false;
+    //public bool lockRotationToBody = false;
+    public LockRotationToBody lockRotationToBody;
+    [System.Serializable]
+    public class LockRotationToBody {
+        public bool x = false;
+        public bool y = false;
+        public bool z = false;
+    };
 
     public float[] depthBuffer;
     private Color32[] colourBuffer;
@@ -45,7 +52,6 @@ public class VDKCollider : MonoBehaviour
     {
         SetRenderView();
         Update();
-        
     }
     void Start()
     {
@@ -258,19 +264,20 @@ public class VDKCollider : MonoBehaviour
         Vector3 offset;
         if (followTarget != null)
         {
-            if (lockRotationToBody)
-                this.transform.rotation = followTarget.transform.rotation;
+            Quaternion newRot = transform.rotation;
+            if (lockRotationToBody.x)
+                newRot.x = followTarget.transform.rotation.x;
 
+            if (lockRotationToBody.y)
+                newRot.y = followTarget.transform.rotation.y;
+
+            if (lockRotationToBody.z)
+                newRot.z = followTarget.transform.rotation.z;
+
+            transform.rotation = newRot;
             offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
-            if (threshholdFollow)
-            {
-                if ((this.transform.position - followTarget.transform.position).magnitude > followThreshold)
-                {
-                    this.transform.position = followTarget.transform.position + offset;
-                    UpdateView();
-                }
-            }
-            else
+            bool thresholdTrigger = (this.transform.position - followTarget.transform.position).magnitude > followThreshold;
+            if (!threshholdFollow || thresholdTrigger)
             {
                 this.transform.position = followTarget.transform.position + offset;
                 UpdateView();
