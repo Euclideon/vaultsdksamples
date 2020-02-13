@@ -264,7 +264,7 @@ public class VDKCollider : MonoBehaviour
         Vector3 offset;
         if (followTarget != null)
         {
-            Quaternion newRot = transform.rotation;
+            Vector3 newRot = transform.rotation.eulerAngles;
             if (lockRotationToBody.x)
                 newRot.x = followTarget.transform.rotation.x;
 
@@ -274,7 +274,7 @@ public class VDKCollider : MonoBehaviour
             if (lockRotationToBody.z)
                 newRot.z = followTarget.transform.rotation.z;
 
-            transform.rotation = newRot;
+            transform.eulerAngles = newRot;
             offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
             bool thresholdTrigger = (this.transform.position - followTarget.transform.position).magnitude > followThreshold;
             if (!threshholdFollow || thresholdTrigger)

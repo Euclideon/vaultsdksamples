@@ -43,6 +43,13 @@ public class CarSwitcher : MonoBehaviour
             UpdateVehicleTransforms();
         }
 
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            Transform vehicleTransform = vehicles[m_VehicleId].transform;
+            vehicleTransform.localEulerAngles = new Vector3(0, vehicleTransform.localEulerAngles.y, 0);
+
+        }
+
         if (Input.GetKeyUp(KeyCode.R))
         {
             Transform vehicleTransform = vehicles[m_VehicleId].transform;
