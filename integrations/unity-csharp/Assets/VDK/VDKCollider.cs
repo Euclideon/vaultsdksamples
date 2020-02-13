@@ -259,26 +259,21 @@ public class VDKCollider : MonoBehaviour
         if (followTarget != null)
         {
             if (lockRotationToBody)
-                offset = Matrix4x4.Rotate(followTarget.transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
-            else
-                offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
+                this.transform.rotation = followTarget.transform.rotation;
 
+            offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
             if (threshholdFollow)
             {
                 if ((this.transform.position - followTarget.transform.position).magnitude > followThreshold)
                 {
                     this.transform.position = followTarget.transform.position + offset;
                     UpdateView();
-                    if(lockRotationToBody)
-                      this.transform.rotation = followTarget.transform.rotation;
                 }
             }
             else
             {
-                this.transform.position = followTarget.transform.position + offset;//+followTarget.transform.TransformVector(watcherPos);
+                this.transform.position = followTarget.transform.position + offset;
                 UpdateView();
-                if(lockRotationToBody)
-                  this.transform.rotation = followTarget.transform.rotation;
             }
         }
         else
