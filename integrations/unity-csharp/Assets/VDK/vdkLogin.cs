@@ -11,24 +11,23 @@ namespace Vault
         public static vdkContext vContext = new vdkContext();
         public static vdkRenderContext renderer = new vdkRenderContext();
         public static string vaultServer = "https://earth.vault.euclideon.com";
-    public static string vaultUsername = "";
-    public static string vaultPassword = "";
+        public static string vaultUsername = "";
+        public static string vaultPassword = "";
         public static void Login()
         {
             if (!GlobalVDKContext.isCreated)
             {
                 try
                 {
-                    Debug.Log("Attempting to resume Euclideon vault session");
+                    Debug.Log("Attempting to resume Euclideon Vault session");
                     vContext.Try_Resume(vaultServer, "Unity", vaultUsername, true);
-
                     vContext.RequestLicense(LicenseType.Render);
                     isCreated = true;
-                    Debug.Log("resume succeeded");
+                    Debug.Log("Resume Succeeded");
                 }
                 catch (System.Exception e)
                 {
-                    Debug.Log(e.ToString() + "Logging in to vault server");
+                    Debug.Log(e.ToString() + "Logging in to Euclideon Vault server");
                     GlobalVDKContext.vContext.Connect(vaultServer, "Unity", vaultUsername, vaultPassword);
                     vContext.RequestLicense(LicenseType.Render);
                     GlobalVDKContext.isCreated = true;

@@ -12,25 +12,13 @@
 *.sln
 **/obj/x64/**
 *.filters
-*.lib
-*.dll
+**/.vs/
+**/Temp/
 
 *Makefile
 
 integrations/unity-csharp/Library/
-
 integrations/unity-csharp/Packages/
-
 integrations/unity-csharp/obj/
-
-integrations/unity-csharp/Assets/VDK/vaultSDK.dll
-
-integrations/unity-csharp/Assets/VDK/vaultSDK.lib
-
-integrations/unity-csharp/.vs/
-
-integrations/unity-csharp/Temp/
-
-languages/cpp/vaultSDK.dll
-
-languages/cpp/vaultSDK.lib
+**/vaultSDK.dll
+**/vaultSDK.lib
