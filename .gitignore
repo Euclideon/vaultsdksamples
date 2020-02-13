@@ -20,6 +20,5 @@
 integrations/unity-csharp/Library/
 integrations/unity-csharp/Packages/
 integrations/unity-csharp/obj/
-
 **/vaultSDK.dll
 **/vaultSDK.lib

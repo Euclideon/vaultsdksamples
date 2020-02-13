@@ -149,6 +149,7 @@ namespace Vault
 
     /*Contains information returned by the picking system
      */
+    [StructLayout(LayoutKind.Sequential)]
     public struct vdkRenderPicking
     {
         public uint x;//view space mouse x
@@ -177,6 +178,7 @@ namespace Vault
     }
 
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct vdkRenderOptions
     {
         public vdkRenderFlags flags; //optional flags providing information on how to perform the render
@@ -216,8 +218,7 @@ namespace Vault
             else if (error == Vault.vdkError.vE_ServerFailure)
                 throw new Exception("Unable to negotiate with server, please confirm the server address");
             else if (error != Vault.vdkError.vE_Success)
-                throw new Exception("Unknown error occurred: " + error.ToString() +
-                  ", please try again later.");
+                throw new Exception("Unknown error occurred: " + error.ToString() +", please try again later.");
         }
 
         public void KeepAlive()
@@ -366,10 +367,10 @@ namespace Vault
         public void Create(vdkContext context, vdkRenderContext renderer, UInt32 width, UInt32 height)
         {
             if (context.pContext == IntPtr.Zero)
-                throw new Exception("context not instatiated");
+                throw new Exception("context not instantiated");
 
             if (renderer.pRenderer == IntPtr.Zero)
-                throw new Exception("renderer not instatiated");
+                throw new Exception("renderer not instantiated");
 
             vdkError error = vdkRenderView_Create(context.pContext, ref pRenderView, renderer.pRenderer, width, height);
             if (error != Vault.vdkError.vE_Success)
@@ -382,6 +383,7 @@ namespace Vault
         {
             if (colorBufferHandle.IsAllocated)
                 colorBufferHandle.Free();
+
             if (depthBufferHandle.IsAllocated)
                 depthBufferHandle.Free();
 
@@ -538,7 +540,6 @@ namespace Vault
 
         [DllImport("vaultSDK")]
         private static extern vdkError vdkConvert_DoConvert(IntPtr pConvertContext);
-
     }
 }
 
