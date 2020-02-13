@@ -19,8 +19,8 @@ Unity Postprocessing >=v2.3.0
 <!-- TODO: Explain how this sample can be used and what is required to get it running -->
 There are two projects included:
 
-* This is the basic project, including a basic flight camera and collider, this demonstrates the basic concepts required to get simulations and games using VDK running in unity. This is ideal for developers wishing to use VDK with their own projects
-* There is also an advanced project: including a driving simulator and third person ragdoll. This demonstrates use of VDK with Unity physics and is good for exploring and testing interactions of unity systems with Unlimited Detail point clouds.
+* The basic project, including a basic flight camera and collider, this demonstrates the basic concepts required to get simulations and games using VDK running in unity. This is ideal for developers wishing to use VDK with their own projects
+* The advanced project: including a driving simulator and third person ragdoll. This demonstrates use of VDK with Unity physics and is good for exploring and testing interactions of unity systems with Unlimited Detail point clouds.
 
 **Both examples require a valid license for Euclideon Vault SDK, trial licenses can be obtained [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code)** 
 
@@ -50,8 +50,9 @@ Photogrammetry model of the Gold Coast courtesy of [Aerometrex](https://aerometr
 
 ## Basic Example
 
-This is an example demonstrating how to use VDK with unity, it includes a minimalist example of a flight camera and an attached collider. 
+This is an example demonstrating how to use VDK with unity, it includes a minimalist example of a flight camera and an attached collider.
 Unlimited detail rendering is implemented as a postprocessing effect that can be applied to cameras in order to display UDS objects.
+
 
 ### Sample Scene Structure
 ![The Structure of the basic sample scene](./docs/sampleSceneStructure.png "Structure of the Sample Scene")
@@ -115,6 +116,35 @@ Smoothing on (note that tree branches are no longer captured by the collision mo
 ![Smoothed](./docs/ColliderFiltered.png "Smoothed Collision Polygon")
 
 As the attached mesh is modified often by this script, baking options for the mesh collider should be turned off for performance reasons
+
+## Advanced Example
+
+The advanced example can be accessed by navigating to Scenes/AdvancedSampleScene in the project view. In addition to the flying camera provided in the basic scene, there are two modes available in play mode demonstrating the
+use of the vdkCollider
+
+```E``` Key is used to switch between Demos during play
+
+
+
+### Driving Simulator
+
+This is based on [Vehicle Tools](https://assetstore.unity.com/packages/essentials/tutorial-projects/vehicle-tools-83660) by Unity Technologies
+
+In game controls:
+
+```W S A D``` Control acceleration, deceleration, turn left and turn right respectively
+```K``` switches the active vehicle from a selection
+
+### 3rd Person Ragdoll
+
+Based on the example [Ragdoll and Transition to Mecanim](https://assetstore.unity.com/packages/templates/systems/ragdoll-and-transition-to-mecanim-38568) by Staz Berzokov
+
+Mouse controls the position of the third person camera
+
+```W S A D``` to move the character around
+
+```SPACE```  To jump
+
 
 ## Known Issues
 

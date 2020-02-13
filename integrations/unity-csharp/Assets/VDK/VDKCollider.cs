@@ -37,7 +37,6 @@ public class VDKCollider : MonoBehaviour
     [Tooltip("Turns on smoothing of collider surface")]
     public bool laplacianSmoothing = false;
     [Tooltip("Determines if the collider rotates with the body of the target object")]
-    //public bool lockRotationToBody = false;
     public LockRotationToBody lockRotationToBody;
     [System.Serializable]
     public class LockRotationToBody {
@@ -52,9 +51,6 @@ public class VDKCollider : MonoBehaviour
     {
         SetRenderView();
         Update();
-    }
-    void Start()
-    {
     }
 
     /*
@@ -159,7 +155,6 @@ public class VDKCollider : MonoBehaviour
      */
     private Vector3[] LaplacianSmooth(Vector3[] verts, int numVertsX, int numVertsY)
     {
-
         Vector3[] newVerts = new Vector3[numVertsX * numVertsY];
         for (int i = 0; i < numVertsY; i++)
         {
