@@ -10,6 +10,7 @@ namespace Vault
         public static bool isCreated = false;
         public static vdkContext vContext = new vdkContext();
         public static vdkRenderContext renderer = new vdkRenderContext();
+        public static SessionKeeper sessionKeeper = new SessionKeeper();
         public static string vaultServer = "https://earth.vault.euclideon.com";
         public static string vaultUsername = "";
         public static string vaultPassword = "";

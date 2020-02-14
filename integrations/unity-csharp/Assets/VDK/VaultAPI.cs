@@ -338,11 +338,6 @@ namespace Vault
                 throw new Exception("renderContext not initialised");
 
             vdkError error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr.Zero));
-            if (error == vdkError.vE_InvalidLicense)
-            {
-                context.RequestLicense(LicenseType.Render);
-                error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr)0);
-            }
 
             if (error != Vault.vdkError.vE_Success)
                 throw new Exception("vdkRenderContext.Render failed: " + error.ToString());

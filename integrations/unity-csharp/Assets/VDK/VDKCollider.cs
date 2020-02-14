@@ -38,12 +38,14 @@ public class VDKCollider : MonoBehaviour
     public bool laplacianSmoothing = false;
     [Tooltip("Determines if the collider rotates with the body of the target object")]
     public LockRotationToBody lockRotationToBody;
+    public Vector3 bodyLockOffset = new Vector3( 0, 0, 0);
     [System.Serializable]
     public class LockRotationToBody {
         public bool x = false;
         public bool y = false;
         public bool z = false;
     };
+
 
     public float[] depthBuffer;
     private Color32[] colourBuffer;
@@ -261,13 +263,13 @@ public class VDKCollider : MonoBehaviour
         {
             Vector3 newRot = transform.rotation.eulerAngles;
             if (lockRotationToBody.x)
-                newRot.x = followTarget.transform.rotation.x;
+                newRot.x = followTarget.transform.eulerAngles.x;
 
             if (lockRotationToBody.y)
-                newRot.y = followTarget.transform.rotation.y;
+                newRot.y = followTarget.transform.eulerAngles.y;
 
             if (lockRotationToBody.z)
-                newRot.z = followTarget.transform.rotation.z;
+                newRot.z = followTarget.transform.eulerAngles.z;
 
             transform.eulerAngles = newRot;
             offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);

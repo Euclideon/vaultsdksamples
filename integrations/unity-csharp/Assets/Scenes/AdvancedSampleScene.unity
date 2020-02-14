@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &90229439
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,6 +1502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SportsCar
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013318341794, guid: 53c496fec7e88b444858ad01c2739816, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013369119048, guid: 53c496fec7e88b444858ad01c2739816, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1823,7 +1827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719574098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.24, y: 2.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1884964165}
@@ -1844,8 +1848,7 @@ MonoBehaviour:
   vehicles:
   - {fileID: 358132064}
   - {fileID: 420057284}
-  - {fileID: 1129077457}
-  spawnPoints: {fileID: 0}
+  spawnPoints: {fileID: 1884964165}
 --- !u!114 &719574101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2991,11 +2994,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011671070286, guid: 7795f89d42f39da46a9ce99e3b258355, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.76
+      value: -5.97
       objectReference: {fileID: 0}
     - target: {fileID: 4000011671070286, guid: 7795f89d42f39da46a9ce99e3b258355, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.17
+      value: -5.64
       objectReference: {fileID: 0}
     - target: {fileID: 4000011671070286, guid: 7795f89d42f39da46a9ce99e3b258355, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3048,7 +3051,7 @@ PrefabInstance:
     - target: {fileID: 54000013136007286, guid: 7795f89d42f39da46a9ce99e3b258355,
         type: 3}
       propertyPath: m_Constraints
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 146000010921399008, guid: 7795f89d42f39da46a9ce99e3b258355,
         type: 3}
@@ -4125,7 +4128,7 @@ MonoBehaviour:
   threshholdFollow: 0
   followThreshold: 0
   watcherPos: {x: 0, y: 0, z: 6}
-  width: 9
+  width: 4
   height: 9
   zNear: 0
   zFar: 12
@@ -4134,7 +4137,7 @@ MonoBehaviour:
   laplacianSmoothing: 1
   lockRotationToBody:
     x: 0
-    y: 0
+    y: 1
     z: 0
   depthBuffer: []
 --- !u!64 &1697514283
@@ -4430,7 +4433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884964164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.6, y: -122.1, z: 22.2}
+  m_LocalPosition: {x: 33.6, y: -89.95, z: 22.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 719574099}

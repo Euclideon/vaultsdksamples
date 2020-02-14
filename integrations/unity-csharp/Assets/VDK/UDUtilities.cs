@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using System.Threading;
 namespace Vault
 {
     public static class UDUtilities
@@ -62,5 +62,32 @@ namespace Vault
             return modelArray.Where(m => (m.pointCloud != System.IntPtr.Zero)).ToArray();
         }
     }
+
+    public class SessionKeeper {
+        Thread thread;
+        public SessionKeeper() {
+            thread = new Thread(new ThreadStart(KeepAlive));
+            thread.Start();
+        }
+        public void KeepAlive() {
+            while (true)
+            {
+                try
+                {
+                    GlobalVDKContext.vContext.KeepAlive();
+                    Debug.Log("keeping alive");
+                }
+                catch(System.Exception e)
+                {
+                    Debug.Log("keepalive failed: " + e.ToString());
+                }
+                Thread.Sleep(30000);
+            }
+        }
+        ~SessionKeeper() {
+            thread.Join();
+        }
+    }
 }
+
 
