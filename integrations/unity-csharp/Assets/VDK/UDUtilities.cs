@@ -8,7 +8,7 @@ namespace Vault
     public static class UDUtilities
     {
         /*
-         *Converts matrix from Unity's right handed transformation convention ( y'=Ay) to
+         *Converts matrix from Unity's left handed transformation convention ( y'=Ay) to
          * left handed system (y'=yA)
          */
         public static double[] GetUDMatrix(Matrix4x4 unityMat)
