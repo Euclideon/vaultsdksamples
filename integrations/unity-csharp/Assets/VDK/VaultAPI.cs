@@ -250,7 +250,7 @@ namespace Vault
         {
             vdkError error = vdkContext_GetLicenseInfo(pContext, type, ref info);
             if (error != Vault.vdkError.vE_Success && error != Vault.vdkError.vE_InvalidLicense)
-                throw new Exception("vdkContext.GetLicenseInfo failed.");
+                throw new Exception("vdkContext.GetLicenseInfo failed: "+ error.ToString());
         }
 
         public void RequestLicense(LicenseType type)
@@ -340,8 +340,13 @@ namespace Vault
             vdkError error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr.Zero));
 
             if (error != Vault.vdkError.vE_Success)
+            {
+                if (error == vdkError.vE_InvalidLicense)
+                {
+                    //UnityEngine.Debug.Log("License Expiry: " + (info.expiresTimestamp-cur_time).ToString());
+                }
                 throw new Exception("vdkRenderContext.Render failed: " + error.ToString());
-
+            }
         }
 
         [DllImport("vaultSDK")]

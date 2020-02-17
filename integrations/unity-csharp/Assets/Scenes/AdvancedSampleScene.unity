@@ -245,6 +245,7 @@ Transform:
   m_Children:
   - {fileID: 420057285}
   - {fileID: 1333410503}
+  - {fileID: 1700708499}
   m_Father: {fileID: 1884964165}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -308,6 +309,50 @@ Transform:
   m_Children:
   - {fileID: 2057004539}
   m_Father: {fileID: 456909230}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &123012028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 123012030}
+  - component: {fileID: 123012029}
+  m_Layer: 0
+  m_Name: MultiModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &123012029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123012028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49d3750734c4c34d83505f3e27d491e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: Y:\Aerometrex\Burnett_Hwy\Burnett_Hwy_med
+--- !u!4 &123012030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123012028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.6654105, y: -50.28667, z: -55.315643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &160718801
@@ -1659,6 +1704,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  bodyLockOffset: {x: 0, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &589569639
 MeshCollider:
@@ -3278,7 +3324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  geoLocate: 0
   path: https://az.vault.euclideon.com/GoldCoast_20mm.uds
 --- !u!1 &1292816360
 GameObject:
@@ -3470,8 +3515,8 @@ MonoBehaviour:
   threshholdFollow: 0
   followThreshold: 0
   watcherPos: {x: 0, y: 0, z: 6}
-  width: 9
-  height: 9
+  width: 3
+  height: 5
   zNear: 0
   zFar: 12
   widthPix: 20
@@ -3479,8 +3524,9 @@ MonoBehaviour:
   laplacianSmoothing: 1
   lockRotationToBody:
     x: 0
-    y: 0
+    y: 1
     z: 0
+  bodyLockOffset: {x: 0, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &1333410507
 MeshCollider:
@@ -4139,6 +4185,7 @@ MonoBehaviour:
     x: 0
     y: 1
     z: 0
+  bodyLockOffset: {x: 0, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &1697514283
 MeshCollider:
@@ -4147,6 +4194,130 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697514278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 0
+  m_Mesh: {fileID: 0}
+--- !u!1 &1700708498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1700708499}
+  - component: {fileID: 1700708503}
+  - component: {fileID: 1700708502}
+  - component: {fileID: 1700708501}
+  - component: {fileID: 1700708500}
+  m_Layer: 0
+  m_Name: front collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1700708499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708498}
+  m_LocalRotation: {x: -0, y: 0.9642358, z: -0, w: -0.26504597}
+  m_LocalPosition: {x: 7.059057, y: 0.28000242, z: 2.5967119}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 90229439}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!23 &1700708500
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708498}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1700708501
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708498}
+  m_Mesh: {fileID: 0}
+--- !u!114 &1700708502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a665f19ffb372e4497c8a99b990117d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followTarget: {fileID: 420057284}
+  threshholdFollow: 0
+  followThreshold: 0
+  watcherPos: {x: 0, y: 3, z: 6}
+  width: 9
+  height: 6
+  zNear: 0
+  zFar: 12
+  widthPix: 20
+  heightPix: 20
+  laplacianSmoothing: 0
+  lockRotationToBody:
+    x: 1
+    y: 1
+    z: 1
+  bodyLockOffset: {x: 0, y: 180, z: 0}
+  depthBuffer: []
+--- !u!64 &1700708503
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700708498}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -4363,6 +4534,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  bodyLockOffset: {x: 0, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &1774037609
 MeshCollider:
@@ -4549,8 +4721,9 @@ MonoBehaviour:
   laplacianSmoothing: 0
   lockRotationToBody:
     x: 1
-    y: 0
+    y: 1
     z: 1
+  bodyLockOffset: {x: 0, y: 180, z: 0}
   depthBuffer: []
 --- !u!64 &1958975993
 MeshCollider:
@@ -5109,6 +5282,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  bodyLockOffset: {x: 0, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &2080726681
 MeshCollider:

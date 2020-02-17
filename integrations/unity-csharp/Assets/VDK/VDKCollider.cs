@@ -263,13 +263,13 @@ public class VDKCollider : MonoBehaviour
         {
             Vector3 newRot = transform.rotation.eulerAngles;
             if (lockRotationToBody.x)
-                newRot.x = followTarget.transform.eulerAngles.x;
+                newRot.x = followTarget.transform.eulerAngles.x + this.bodyLockOffset.x;
 
             if (lockRotationToBody.y)
-                newRot.y = followTarget.transform.eulerAngles.y;
+                newRot.y = followTarget.transform.eulerAngles.y + this.bodyLockOffset.y;
 
             if (lockRotationToBody.z)
-                newRot.z = followTarget.transform.eulerAngles.z;
+                newRot.z = followTarget.transform.eulerAngles.z +this.bodyLockOffset.z;
 
             transform.eulerAngles = newRot;
             offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
