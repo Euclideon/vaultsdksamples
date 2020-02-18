@@ -1,6 +1,6 @@
 # VDK Unity
 
-This project demonstrates the use of Euclideon Vault developer Kit (VDK) with the Unity Real Time Development Platform. 
+This project demonstrates the use of Euclideon Vault developer Kit (Vault SDK) with the Unity Real Time Development Platform. 
 
 ```
 Language:              C#
@@ -28,8 +28,8 @@ There are two projects included:
 
 Both examples are tested with Unity 2019.3.0f6, all steps must be repeated for each package in their respective directories.
 
-1. Download and extract VDK 0.5.0 package from [here](https://earth.vault.euclideon.com) using your license credentials (if you do not have one, free trials are available from [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code) )
-2. Download the Unity VDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
+1. Download and extract Vault SDK 0.5.0 package from [here](https://earth.vault.euclideon.com) using your license credentials (if you do not have one, free trials are available from [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code) )
+2. Download the Unity Vault SDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
 3. Copy the files from _Euclideon_vdk0.5.0/lib/(_your operating system here_)/_ to _vaultsdksamples/integrations/unity-csharp/Assets/VDK in your Unity project
 4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details 
 5. Open Unity Hub, Select Add and specify the  project as the source folder; select the unity version next to the project name; click on the project name
@@ -50,7 +50,7 @@ Photogrammetry model of the Gold Coast courtesy of [Aerometrex](https://aerometr
 
 ## Basic Example
 
-This is an example demonstrating how to use VDK with unity, it includes a minimalist example of a flight camera and an attached collider.
+This is an example demonstrating how to use Vault SDK with Unity, it includes a minimalist example of a flight camera and an attached collider.
 Unlimited detail rendering is implemented as a postprocessing effect that can be applied to cameras in order to display UDS objects.
 
 
@@ -75,7 +75,7 @@ and login information between objects, and a ```vdkRenderContext```, enabling th
 
 ### VDKPPER 
 
-_VDKPPES.cs_ contains the implemention of VDK in Unity as a post processing effect. The associated shader is ```vdkShader.shader```
+_VDKPPES.cs_ contains the implemention of Vault SDK in Unity as a post processing effect. The associated shader is ```vdkShader.shader```
 
 ### VDK Collider
 
@@ -128,6 +128,8 @@ use of the vdkCollider
 
 ### Driving Simulator
 
+![Driving Example](./docs/drivingExample.png "Driving Example")
+
 This is based on [Vehicle Tools](https://assetstore.unity.com/packages/essentials/tutorial-projects/vehicle-tools-83660) by Unity Technologies
 
 In game controls:
@@ -136,6 +138,8 @@ In game controls:
 ```K``` switches the active vehicle from a selection
 
 ### 3rd Person Ragdoll
+
+![Ragdoll Example](./docs/ragdollExample.png "Ragdoll Example")
 
 Based on the example [Ragdoll and Transition to Mecanim](https://assetstore.unity.com/packages/templates/systems/ragdoll-and-transition-to-mecanim-38568) by Staz Berzokov
 
