@@ -81,18 +81,14 @@ namespace VaultClient
 
                 Vault.vdkRenderInstance[] modelArray = new Vault.vdkRenderInstance[] { item, itemFlipped };
 
-                Vault.vdkRenderOptions options = new Vault.vdkRenderOptions();
-                Vault.vdkRenderPicking pick = new Vault.vdkRenderPicking();
-                options.pPick = IntPtr.Zero;
-                //Marshal.StructureToPtr(pick, options.pPick, false);
-                GCHandle pickingHandle = GCHandle.Alloc(pick, GCHandleType.Pinned);
-                options.pPick = pickingHandle.AddrOfPinnedObject();
+                //Demonstrating the picking system:
+                Vault.RenderOptions options = new Vault.RenderOptions();
+                options.setPick(440, 470);
 
                 for (int i = 0; i < 10; i++)
-                    renderer.Render(renderView, modelArray, modelArray.Length, ref options);
+                    renderer.Render(renderView, modelArray, modelArray.Length, options);
 
-                pickingHandle.Free();
-                Console.WriteLine(pick.pointCenter);
+                Vault.vdkRenderPicking pick = options.Pick;
 
                 string imagePath = "tmp.png";
                 SaveColorImage(imagePath, width, height, colorBuffer);
