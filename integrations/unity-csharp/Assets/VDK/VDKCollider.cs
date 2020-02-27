@@ -60,7 +60,7 @@ public class VDKCollider : MonoBehaviour
      */
     float zBufferToDepth(float z)
     {
-        return (z * 0.5f + 0.5f) * (zFar - zNear) + zNear;
+        return UDUtilities.zBufferToDepth(z, zNear, zFar);
     }
 
     /*
@@ -298,7 +298,8 @@ public class VDKCollider : MonoBehaviour
         renderView.SetMatrix(Vault.RenderViewMatrix.Camera, frontPlaneView);
         Matrix4x4 projection = Matrix4x4.Ortho(-width / 2, width / 2, height / 2, -height / 2, zNear, zFar);
         renderView.SetMatrix(Vault.RenderViewMatrix.Projection, UDUtilities.GetUDMatrix(projection));
-        GlobalVDKContext.renderer.Render(renderView, modelArray, modelArray.Length);
+        RenderOptions options = new RenderOptions();
+        GlobalVDKContext.renderer.Render(renderView, modelArray, modelArray.Length, options);
         MakeSheetMesh(width, height, (int)widthPix, (int)heightPix, depthBuffer);
     }
 

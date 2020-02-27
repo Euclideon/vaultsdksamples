@@ -225,6 +225,11 @@ MonoBehaviour:
   widthPix: 5
   heightPix: 5
   laplacianSmoothing: 0
+  lockRotationToBody:
+    x: 0
+    y: 0
+    z: 0
+  bodyLockOffset: {x: 0, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &308979313
 MeshCollider:
@@ -385,14 +390,19 @@ MonoBehaviour:
   followTarget: {fileID: 963194225}
   threshholdFollow: 0
   followThreshold: 0
-  watcherPos: {x: 0, y: 5, z: 0}
-  width: 100
-  height: 100
-  zNear: 0
-  zFar: 10
+  watcherPos: {x: 0, y: 0, z: 5}
+  width: 10
+  height: 10
+  zNear: -500
+  zFar: 500
   widthPix: 50
   heightPix: 50
   laplacianSmoothing: 0
+  lockRotationToBody:
+    x: 1
+    y: 1
+    z: 1
+  bodyLockOffset: {x: 180, y: 0, z: 0}
   depthBuffer: []
 --- !u!64 &589569639
 MeshCollider:
@@ -483,6 +493,8 @@ GameObject:
   - component: {fileID: 963194231}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194232}
+  - component: {fileID: 963194233}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -549,7 +561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.028237343, y: -0.7686037, z: 0.0138120055, w: 0.6389525}
-  m_LocalPosition: {x: 36.6, y: 9.2, z: -33228}
+  m_LocalPosition: {x: 0, y: 9.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -652,6 +664,30 @@ MonoBehaviour:
   camSens: 0.25
   rotateOnlyIfMousedown: 1
   movementStaysFlat: 1
+--- !u!114 &963194232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028e291e24f058447a4786f383aab270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &963194233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ca4ffd1d907094a8159f0df74c170f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1007878391
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +746,7 @@ Transform:
   m_GameObject: {fileID: 1230187113}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -727,5 +763,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  geoLocate: 0
   path: https://az.vault.euclideon.com/GoldCoast_20mm.uds

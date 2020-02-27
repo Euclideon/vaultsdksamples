@@ -7,6 +7,17 @@ namespace Vault
 {
     public static class UDUtilities
     {
+
+        /*
+         * converts the z buffer value to a world space displacement
+         */
+        public static float zBufferToDepth(float z, float zNear, float zFar, bool ortho = true)
+        {
+            if (ortho)
+                return (z * 0.5f + 0.5f) * (zFar - zNear) + zNear;
+            else
+                return (2 * zNear * zFar / (zNear - zFar)) / (z - (zFar + zNear) / (zFar - zNear));
+        }
         /*
          *Converts matrix from Unity's left handed transformation convention ( y'=Ay) to
          * left handed system (y'=yA)

@@ -150,14 +150,14 @@ namespace Vault
     /*Contains information returned by the picking system
      */
     [StructLayout(LayoutKind.Sequential)]
-    public struct vdkRenderPicking
+    unsafe public struct vdkRenderPicking
     {
-        public uint x;//view space mouse x
-        public uint y;//view space mouse y
-        public bool hit;//true if voxel was hit by this pick
-        public bool isHighestLOD;//true if hit was as accurate as possible
-        public uint modelIndex; //index of the model in the array hit by this pick
-        public double[] pointCenter; //location of the point hit by the pick
+        public UInt32 x;//view space mouse x
+        public UInt32 y;//view space mouse y
+        public Byte hit;//true if voxel was hit by this pick
+        public Byte isHighestLOD;//true if hit was as accurate as possible
+        public UInt32 modelIndex; //index of the model in the array hit by this pick
+        public fixed double pointCenter[3]; //location of the point hit by the pick
         public UInt64 voxelID; //ID of the hit voxel
     }
 
@@ -182,7 +182,8 @@ namespace Vault
     public struct vdkRenderOptions
     {
         public vdkRenderFlags flags; //optional flags providing information on how to perform the render
-        public vdkRenderPicking pPick;
+        public IntPtr pPick;
+        //public vdkRenderPicking pPick;
         public vdkRenderContextPointMode pointMode;
         public IntPtr pFilter;//pointer to a vdkQueryFilter
     }
@@ -218,7 +219,7 @@ namespace Vault
             else if (error == Vault.vdkError.vE_ServerFailure)
                 throw new Exception("Unable to negotiate with server, please confirm the server address");
             else if (error != Vault.vdkError.vE_Success)
-                throw new Exception("Unknown error occurred: " + error.ToString() +", please try again later.");
+                throw new Exception("Unknown error occurred: " + error.ToString() + ", please try again later.");
         }
 
         public void KeepAlive()
@@ -250,7 +251,7 @@ namespace Vault
         {
             vdkError error = vdkContext_GetLicenseInfo(pContext, type, ref info);
             if (error != Vault.vdkError.vE_Success && error != Vault.vdkError.vE_InvalidLicense)
-                throw new Exception("vdkContext.GetLicenseInfo failed: "+ error.ToString());
+                throw new Exception("vdkContext.GetLicenseInfo failed: " + error.ToString());
         }
 
         public void RequestLicense(LicenseType type)
@@ -323,7 +324,7 @@ namespace Vault
             pRenderer = IntPtr.Zero;
         }
 
-        public void Render(vdkRenderView renderView, vdkRenderInstance[] pModels, int modelCount)
+        public void Render(vdkRenderView renderView, vdkRenderInstance[] pModels, int modelCount, RenderOptions options)
         {
             if (modelCount == 0)
                 return;
@@ -337,16 +338,13 @@ namespace Vault
             if (pRenderer == IntPtr.Zero)
                 throw new Exception("renderContext not initialised");
 
-            vdkError error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, (IntPtr.Zero));
+            vdkError error = vdkRenderContext_Render(pRenderer, renderView.pRenderView, pModels, modelCount, options.options);
 
             if (error != Vault.vdkError.vE_Success)
             {
-                if (error == vdkError.vE_InvalidLicense)
-                {
-                    //UnityEngine.Debug.Log("License Expiry: " + (info.expiresTimestamp-cur_time).ToString());
-                }
                 throw new Exception("vdkRenderContext.Render failed: " + error.ToString());
             }
+            options.pickRendered = true;
         }
 
         [DllImport("vaultSDK")]
@@ -354,7 +352,7 @@ namespace Vault
         [DllImport("vaultSDK")]
         private static extern vdkError vdkRenderContext_Destroy(ref IntPtr ppRenderer);
         [DllImport("vaultSDK")]
-        private static extern vdkError vdkRenderContext_Render(IntPtr pRenderer, IntPtr pRenderView, vdkRenderInstance[] pModels, int modelCount, IntPtr options);
+        private static extern vdkError vdkRenderContext_Render(IntPtr pRenderer, IntPtr pRenderView, vdkRenderInstance[] pModels, int modelCount, [In, Out] vdkRenderOptions options);
     }
 
     public class vdkRenderView
@@ -449,6 +447,71 @@ namespace Vault
         private static extern vdkError vdkRenderView_SetMatrix(IntPtr pRenderView, RenderViewMatrix matrixType, double[] cameraMatrix);
     }
 
+    public class RenderOptions
+    {
+        private unsafe vdkRenderPicking pick;
+        public vdkRenderOptions options;
+        public bool pickSet = false;
+        public bool pickRendered = false;
+
+        public RenderOptions(vdkRenderContextPointMode pointMode, vdkRenderFlags flags)
+        {
+            options.pointMode = pointMode;
+            //this will need to change once support for multiple picks is introduced:
+            options.pPick = Marshal.AllocHGlobal(Marshal.SizeOf(pick));
+            options.flags = flags;
+        }
+
+        public RenderOptions() :this(vdkRenderContextPointMode.vdkRCPM_Rectangles,vdkRenderFlags.vdkRF_None)
+        {
+            
+        }
+
+        public void setPick(uint x, uint y)
+        {
+            pick = new vdkRenderPicking();
+            pick.x = x;
+            pick.y = y;
+            Marshal.StructureToPtr(pick, options.pPick, true);
+
+            pickRendered = false;
+            pickSet = true;
+
+        }
+
+        public unsafe vdkRenderPicking Pick
+        {
+            get
+            {
+                if (!pickSet)
+                    return new vdkRenderPicking();
+
+                if (!pickRendered)
+                    throw new Exception("Render must be called before pick can be read");
+
+                pick = *( (vdkRenderPicking *) options.pPick.ToPointer());
+                return pick;
+            }
+        }
+
+        unsafe public UnityEngine.Vector3 PickLocation()
+        {
+            vdkRenderPicking pick = this.Pick;
+            return new UnityEngine.Vector3((float)pick.pointCenter[0],(float)pick.pointCenter[1],(float)pick.pointCenter[2]);
+        }
+
+        public vdkRenderOptions Options {
+            get
+            {
+                return options;
+            }
+        }
+
+        ~RenderOptions()
+        {
+            Marshal.FreeHGlobal(options.pPick);
+        }
+    }
     public class vdkPointCloud
     {
         public void Load(vdkContext context, string modelLocation, ref vdkPointCloudHeader header)
