@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &123012029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49d3750734c4c34d83505f3e27d491e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: Y:\Aerometrex\Burnett_Hwy\Burnett_Hwy_med
+  path: 
+  reload: 0
 --- !u!4 &123012030
 Transform:
   m_ObjectHideFlags: 0
@@ -349,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123012028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.6654105, y: -50.28667, z: -55.315643}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -444,9 +445,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 963194228}
   - {fileID: 1884964165}
   - {fileID: 1667001902}
-  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1860,7 +1861,7 @@ GameObject:
   - component: {fileID: 719574105}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2577,7 +2578,7 @@ Transform:
   m_Children:
   - {fileID: 589569640}
   m_Father: {fileID: 281474328}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 3.2860003, y: -100.56801, z: -1.478}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -2753,7 +2754,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0aa851515cd3747d6b3b3e461199a2ed, type: 2}
+      objectReference: {fileID: 2100000, guid: cc88f1134328dbe4d85a24816c78bff9, type: 2}
     - target: {fileID: 532129877159064152, guid: 43c912a2d0e9b694c81bd0baac453b85,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -3305,13 +3306,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230187113}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalRotation: {x: -0.020332795, y: 0.0342515, z: -0.019110156, w: 0.9990237}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.253, y: 3.9720001, z: -2.2700002}
 --- !u!114 &1230187115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3324,7 +3325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  geolocationOffset: {x: 0, y: 0, z: 0}
   path: https://az.vault.euclideon.com/GoldCoast_20mm.uds
+  geolocate: 0
 --- !u!1 &1292816360
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,7 +4078,7 @@ Transform:
   - {fileID: 511422622}
   - {fileID: 1774037605}
   m_Father: {fileID: 281474328}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697514278
 GameObject:
@@ -4613,7 +4616,7 @@ Transform:
   - {fileID: 90229439}
   - {fileID: 513449569}
   m_Father: {fileID: 281474328}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1958975988
 GameObject:

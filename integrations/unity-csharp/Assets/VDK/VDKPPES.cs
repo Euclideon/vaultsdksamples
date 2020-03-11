@@ -89,29 +89,9 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
             {
                 options = optionsContainer.optionsStruct;
             }
-            
             else
             {
-                // GameObject ob = GameObject.FindGameObjectWithTag("sceneCameraOptions");
-                // if (ob != null)
-                // {
-                //     optionsContainer = ob.GetComponent<vdkCameraOptions>();
-                // }
-
-                // else
-                // {
-                //     optionsContainer = null;
-                // }
-
-                // if (optionsContainer != null)
-                // {
-                //     options = optionsContainer.optionsStruct;
-                // }
-
-                // else
-                // {
-                //     options = new RenderOptions();
-                // }
+                options = new RenderOptions();
 
                 // The above comment block has been left for safety, and without user defined tags will always execute the following 2 lines
                 optionsContainer = null;
@@ -121,9 +101,9 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
             GlobalVDKContext.renderer.Render(vRenderView, modelArray, modelArray.Length, options);
 
             //pass the depth buffer back to the unity interface for further processing:
-            if (optionsContainer != null && optionsContainer.recordDepthBuffer) { }
-            //optionsContainer.setDepthImageFromZ(depthBuffer);//for as yet unimplemented features
-
+            if (optionsContainer != null && optionsContainer.recordDepthBuffer) 
+              optionsContainer.setDepthImageFromZ(depthBuffer);//for as yet unimplemented features
+            
             //make sure that the textures exist before operating on them
             if (colourTexture == null || depthTexture == null)
                 InitialiseTextures();

@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Vault;
-
 public class vdkCameraOptions : MonoBehaviour
 {
-    Camera cam;
+    public Camera cam;
     public RenderOptions optionsStruct = new RenderOptions();
     public vdkRenderContextPointMode pointMode = vdkRenderContextPointMode.vdkRCPM_Rectangles;
-    bool placeNext = false;
+    public bool recordDepthBuffer = false;
+    public bool placeCubesOnPick = true;
+    public bool placeNext = false;
     GameObject previewCube;
 
-    public bool recordDepthBuffer = false;
 
     //depth buffer of the camera for surface estimate calculations
     float[] depthBuffer;
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        if (cam == null) {
+            cam = Camera.main;
+        }
     }
     void Start()
     {
@@ -32,11 +35,14 @@ public class vdkCameraOptions : MonoBehaviour
     void Update()
     {
         cam = GetComponent<Camera>();
+        if (cam == null)
+            cam = Camera.main;
+
         optionsStruct.options.pointMode = pointMode;
 
         if (optionsStruct.pickRendered)
         {
-            if (optionsStruct.Pick.hit == 0 && placeNext)
+            if (placeNext && optionsStruct.Pick.hit == 0 )
                 Debug.Log("missed!");
             else
             {
@@ -48,13 +54,16 @@ public class vdkCameraOptions : MonoBehaviour
                     {
                         Debug.Log("Warning: pick may not represent actual point in cloud");
                     }
-                    var marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    marker.GetComponent<Renderer>().material.color = Color.red;
-                    marker.transform.position = pickCentre;
-                    placeNext = false;
+                    if (placeCubesOnPick)
+                    {
+                        var marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        marker.GetComponent<Renderer>().material.color = Color.red;
+                        marker.transform.position = pickCentre;
+                    }
                 }
                 previewCube.transform.position = pickCentre;
             }
+            placeNext = false;
         }
 
         Vector3 mp = Input.mousePosition;
@@ -76,23 +85,27 @@ public class vdkCameraOptions : MonoBehaviour
 
     /*
      *generates and stores a depth image rom a z buffer for use in spacial calculations
+     * this is pretty expensive
      */
     public void setDepthImageFromZ(float[] value)
     {
-        depthBuffer = (float[]) value.Clone();
-        for (int i= 0; i< depthBuffer.Length; ++i)
-        {
-            if (cam == null)
-                return;
+      if (cam == null)
+          return;
 
-            depthBuffer[i] = UDUtilities.zBufferToDepth(depthBuffer[i], cam.nearClipPlane, cam.farClipPlane, false);
-        }
-    }
-    public float[] DepthBuffer
-    {
-        get
-        {
-            return depthBuffer;
-        }
-    }
+      if (depthBuffer == null || depthBuffer.Length!=value.Length) {
+          depthBuffer = new float[value.Length];
+      }
+
+      for (int i= 0; i< depthBuffer.Length; ++i)
+      {
+          depthBuffer[i] = UDUtilities.zBufferToDepth(depthBuffer[i], cam.nearClipPlane, cam.farClipPlane, false);
+      }
+  }
+  public float[] DepthBuffer
+  {
+      get
+      {
+          return depthBuffer;
+      }
+  }
 }
