@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &123012029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123012028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.6654105, y: -50.28667, z: -55.315643}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -444,9 +444,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 963194228}
   - {fileID: 1884964165}
   - {fileID: 1667001902}
-  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1860,7 +1860,7 @@ GameObject:
   - component: {fileID: 719574105}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2577,7 +2577,7 @@ Transform:
   m_Children:
   - {fileID: 589569640}
   m_Father: {fileID: 281474328}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 3.2860003, y: -100.56801, z: -1.478}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -2753,7 +2753,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0aa851515cd3747d6b3b3e461199a2ed, type: 2}
+      objectReference: {fileID: 2100000, guid: cc88f1134328dbe4d85a24816c78bff9, type: 2}
     - target: {fileID: 532129877159064152, guid: 43c912a2d0e9b694c81bd0baac453b85,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -3297,7 +3297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1230187114
 Transform:
   m_ObjectHideFlags: 0
@@ -3305,13 +3305,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230187113}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalRotation: {x: -0.020332795, y: 0.0342515, z: -0.019110156, w: 0.9990237}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.253, y: 3.9720001, z: -2.2700002}
 --- !u!114 &1230187115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3324,7 +3324,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelToPivot:
+    e00: 41943.04
+    e01: 0
+    e02: 0
+    e03: -21922.639
+    e10: 0
+    e11: -0.0025
+    e12: 41943.035
+    e13: -150.7991
+    e20: 0
+    e21: 41943.035
+    e22: 0.0025
+    e23: -14636.009
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  storedMatrix:
+    e00: 41943.04
+    e01: 0
+    e02: 0
+    e03: 520170.78
+    e10: 0
+    e11: 41943.04
+    e12: 0
+    e13: 6887914
+    e20: 0
+    e21: 0
+    e22: 41943.04
+    e23: -18.307474
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  fileScale: {x: 5.053001, y: 5.053001, z: 5.053001}
   path: https://az.vault.euclideon.com/GoldCoast_20mm.uds
+  geolocate: 0
 --- !u!1 &1292816360
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,7 +4111,7 @@ Transform:
   - {fileID: 511422622}
   - {fileID: 1774037605}
   m_Father: {fileID: 281474328}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697514278
 GameObject:
@@ -4613,8 +4649,88 @@ Transform:
   - {fileID: 90229439}
   - {fileID: 513449569}
   m_Father: {fileID: 281474328}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1897460636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897460638}
+  - component: {fileID: 1897460637}
+  m_Layer: 0
+  m_Name: UDS Model (1)
+  m_TagString: UDSModel
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897460637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897460636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelToPivot:
+    e00: 163.84
+    e01: 0
+    e02: 0
+    e03: -77.195
+    e10: 0
+    e11: -0.000009765625
+    e12: 163.83998
+    e13: -26.499994
+    e20: 0
+    e21: 163.83998
+    e22: 0.000009765625
+    e23: -54.914997
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  storedMatrix:
+    e00: 163.84
+    e01: 0
+    e02: 0
+    e03: 5.04798
+    e10: 0
+    e11: 163.84
+    e12: 0
+    e13: -114.60319
+    e20: 0
+    e21: 0
+    e22: 163.84
+    e23: 24.928957
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  fileScale: {x: 3.364962, y: 3.364962, z: 3.364962}
+  path: Y:\3DTalo\s_Vaneri000_subsampled.uds
+  geolocate: 0
+--- !u!4 &1897460638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897460636}
+  m_LocalRotation: {x: -0.020332795, y: 0.0342515, z: -0.019110156, w: 0.9990237}
+  m_LocalPosition: {x: 13.5, y: -117.71, z: 7.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -2.253, y: 3.9720001, z: -2.2700002}
 --- !u!1 &1958975988
 GameObject:
   m_ObjectHideFlags: 0

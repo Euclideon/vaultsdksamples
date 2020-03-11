@@ -391,8 +391,8 @@ MonoBehaviour:
   threshholdFollow: 0
   followThreshold: 0
   watcherPos: {x: 0, y: 0, z: 5}
-  width: 10
-  height: 10
+  width: 1
+  height: 1
   zNear: -500
   zFar: 500
   widthPix: 50
@@ -561,7 +561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.028237343, y: -0.7686037, z: 0.0138120055, w: 0.6389525}
-  m_LocalPosition: {x: 0, y: 9.2, z: 0}
+  m_LocalPosition: {x: 28.679, y: 1.35, z: 3.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -688,6 +688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ca4ffd1d907094a8159f0df74c170f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 963194227}
+  pointMode: 0
+  recordDepthBuffer: 1
+  placeCubesOnPick: 1
+  placeNext: 0
 --- !u!1 &1007878391
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,13 +749,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230187113}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.053901132, w: 0.9985463}
+  m_LocalPosition: {x: 4.6, y: 2.6, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.1800003}
 --- !u!114 &1230187115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,4 +768,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: https://az.vault.euclideon.com/GoldCoast_20mm.uds
+  fileScale: {x: 2.966873, y: 2.966873, z: 2.966873}
+  path: Y:\Orion QR\Final\ForemanOfficeIpswich_HDS.uds
+  geolocate: 0
+--- !u!1 &1518113010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518113012}
+  - component: {fileID: 1518113011}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: sceneCameraOptions
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1518113011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518113010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ca4ffd1d907094a8159f0df74c170f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 963194227}
+  pointMode: 0
+  recordDepthBuffer: 1
+  placeCubesOnPick: 1
+  placeNext: 0
+--- !u!4 &1518113012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518113010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.174862, y: 3.5960846, z: -4.551773}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

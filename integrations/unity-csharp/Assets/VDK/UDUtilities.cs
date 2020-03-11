@@ -7,6 +7,9 @@ namespace Vault
 {
     public static class UDUtilities
     {
+        public static Matrix4x4 UDtoGL =
+                        Matrix4x4.Scale(new Vector3(1, -1, 1)) *
+                        Matrix4x4.Rotate(Quaternion.Euler(90, 0, 0));
 
         /*
          * converts the z buffer value to a world space displacement
@@ -60,8 +63,7 @@ namespace Vault
             vdkRenderInstance[] modelArray = new vdkRenderInstance[objects.Length];
             for (int i = 0; i < objects.Length; ++i)
             {
-                Component component = objects[i].GetComponent("UDSModel");
-                UDSModel model = component as UDSModel;
+                UDSModel model = (UDSModel) objects[i].GetComponent("UDSModel");
 
                 if (!model.isLoaded)
                     model.LoadModel();
@@ -69,7 +71,12 @@ namespace Vault
                 if (model.isLoaded)
                 {
                     modelArray[count].pointCloud = model.udModel.pModel;
-                    modelArray[count].worldMatrix = UDUtilities.GetUDMatrix(model.pivotTranslation * model.modelScale * objects[i].transform.localToWorldMatrix * model.pivotTranslation.inverse);
+                    Transform localTransform = objects[i].transform;
+
+                    modelArray[count].worldMatrix = UDUtilities.GetUDMatrix(
+                            Matrix4x4.TRS(model.transform.position, model.transform.rotation, model.transform.localScale) *
+                            model.modelToPivot
+                        );
                     count++;
                 }
             }
