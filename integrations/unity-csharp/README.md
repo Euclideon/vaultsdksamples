@@ -9,28 +9,30 @@ Contributor:           Euclideon Vault Development Team <support@euclideon.com>
 Organization:          Euclideon, https://euclideon.com/vault
 Date:                  2020-02-03
 Vault SDK Version:     0.5.0
-Toolsets:              Requires Unity >=2019.3
+Toolsets:              Requires Unity >=2019.3.4f1
 ```
 
-## How to use the sample
-<!-- TODO: Explain how this sample can be used and what is required to get it running -->
-There are two projects included:
+## Before you begin
+**The Unity examples require a valid license for Euclideon Vault SDK, trial licenses can be obtained [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code)** 
+The following install guides are confirmed to work with Unity 2019.3.4f1
 
-* The basic project, including a basic flight camera and collider, this demonstrates the basic concepts required to get simulations and games using VDK running in unity. This is ideal for developers wishing to use VDK with their own projects
-* The advanced project: including a driving simulator and third person ragdoll. This demonstrates use of VDK with Unity physics and is good for exploring and testing interactions of unity systems with Unlimited Detail point clouds.
+### Installation - Unity Quick Start
+The fastest way to get started with VaultSDK in Unity is to navigate to [here](https://www.euclideon.com/unity/) and follow the on screen instructions.
 
-**Both examples require a valid license for Euclideon Vault SDK, trial licenses can be obtained [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code)** 
-
-### Installation
-
-Both examples are tested with Unity 2019.3.0f6, all steps must be repeated for each package in their respective directories.
+### Installation - Unity Github Samples
 
 1. Download and extract Vault SDK 0.5.0 package from [here](https://earth.vault.euclideon.com) using your license credentials (if you do not have one, free trials are available from [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code) )
-2. Download the Unity Vault SDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
-3. Copy the files from _Euclideon_vdk0.5.0/lib/(_your operating system here_)/_ to _vaultsdksamples/integrations/unity-csharp/Assets/VDK in your Unity project
-4. Replace the username and password lines from _Assets/VDK/vdkLogin.cs_ to your vault login details 
-5. Open Unity Hub, Select Add and specify the  project as the source folder; select the unity version next to the project name; click on the project name
-7. Open the sample scene from the project, (Scenes/SampleScene or Scenes/AdvancedScene in the project explorer) press play to fly the camera in the chose scene using game view. Refer to known issues if the game does not run
+2. Clone or Download the Vault SDK examples from [here](https://github.com/Euclideon/vaultsdksamples)
+3. Copy the files from _Euclideon_vdk0.5.0/lib/(_your operating system here_)/_ to _vaultsdksamples/integrations/unity-csharp/Assets/VDK in the Unity project
+4. Open SampleScene.unity contained in _vaultsdksamples/integrations/unity-csharp/Assets/Scenes (Unity version 2019.3.4f1 required)
+5. From the Unity Toolbar, Navigate to VDK > Set User Info. Enter your VaultSDK Username and Password obtained [here](https://zfrmz.com/gwVUru84d60yUedxmLx9/?ref=Unity%20Sample%20Code)  and click Save User Info.
+6. Hit play.
+
+Your license may take a few moments to clear with our servers, but once it does it will remain active for the duration of your session.
+
+In the event that the above steps are not performed inorder, restarting the unity editor should resolve any compliation errors/issues that may arise.
+
+## Using the UnityVDK
 
 ### Changing UDS model
 
