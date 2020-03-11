@@ -13,6 +13,7 @@ public class vdkCameraOptions : MonoBehaviour
     public bool placeNext = false;
     GameObject previewCube;
 
+
     //depth buffer of the camera for surface estimate calculations
     float[] depthBuffer;
     private void Awake()

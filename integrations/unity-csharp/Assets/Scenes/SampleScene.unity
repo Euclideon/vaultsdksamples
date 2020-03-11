@@ -426,7 +426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589569637}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1350.3129, y: 334.12158, z: 274.52225}
+  m_LocalPosition: {x: -1350.3129, y: 334.12158, z: 276.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -509,7 +509,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -638,8 +638,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles:
   - assemblyQualifiedName: VDKPPES, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -690,7 +690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
   pointMode: 0
-  recordDepthBuffer: 1
+  recordDepthBuffer: 0
   placeCubesOnPick: 1
   placeNext: 0
 --- !u!1 &1007878391
@@ -768,54 +768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb015bdb5ced9b84b820168d78785468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileScale: {x: 2.966873, y: 2.966873, z: 2.966873}
-  path: Y:\Orion QR\Final\ForemanOfficeIpswich_HDS.uds
+  geolocationOffset: {x: 0, y: 0, z: 0}
+  path: https://az.vault.euclideon.com/GoldCoast_20mm.uds
   geolocate: 0
---- !u!1 &1518113010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1518113012}
-  - component: {fileID: 1518113011}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: sceneCameraOptions
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1518113011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518113010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5ca4ffd1d907094a8159f0df74c170f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
-  pointMode: 0
-  recordDepthBuffer: 1
-  placeCubesOnPick: 1
-  placeNext: 0
---- !u!4 &1518113012
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518113010}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.174862, y: 3.5960846, z: -4.551773}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

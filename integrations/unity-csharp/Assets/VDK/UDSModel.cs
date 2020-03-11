@@ -44,9 +44,11 @@ public class UDSModel : MonoBehaviour
         if (geolocate)
         {
             this.transform.localPosition =  UDUtilities.UDtoGL *
-                new Vector3((float)(header.baseOffset[0] + header.pivot[0] * header.scaledRange),
-                (float)(header.baseOffset[1] + header.pivot[1] * header.scaledRange),
-                (float)(header.baseOffset[2] + header.pivot[2] * header.scaledRange));
+                new Vector3(
+                    (float)(header.baseOffset[0] + header.pivot[0] * header.scaledRange),
+                    (float)(header.baseOffset[1] + header.pivot[1] * header.scaledRange),
+                    (float)(header.baseOffset[2] + header.pivot[2] * header.scaledRange)
+                    );
             transform.localPosition += geolocationOffset;
             geolocate = false;
         }
