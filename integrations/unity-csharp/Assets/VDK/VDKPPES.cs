@@ -86,8 +86,27 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
             vdkCameraOptions optionsContainer = cam.GetComponent<vdkCameraOptions>();
             RenderOptions options;
             if (optionsContainer != null)
+            {
                 options = optionsContainer.optionsStruct;
             else {
+                options = new RenderOptions();
+                // else
+                // {
+                //     optionsContainer = null;
+                // }
+
+                // if (optionsContainer != null)
+                // {
+                //     options = optionsContainer.optionsStruct;
+                // }
+
+                // else
+                // {
+                //     options = new RenderOptions();
+                // }
+
+                // The above comment block has been left for safety, and without user defined tags will always execute the following 2 lines
+                optionsContainer = null;
                 options = new RenderOptions();
             }
 
