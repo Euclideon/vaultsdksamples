@@ -47,8 +47,8 @@ public class loadAllUDSInDirectory : MonoBehaviour
                     ++baseInd;
                 continue;
             }
-            if (i == baseInd)
-            {//reference all models to the first 
+            if (i == baseInd) //reference all models to the first 
+            {
                 rootBaseOffset = model.header.baseOffset;
             }
             model.geolocationOffset =
