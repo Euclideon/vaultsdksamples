@@ -5,7 +5,7 @@ using UnityEngine;
 using Vault;
 
 /*
- *Loads all uds files in a local path and places them in the world space relative to the first
+ * Loads all UDS files in a local path and places them in the world space relative to the first
  * Intended for multi part uds files
  */
  
