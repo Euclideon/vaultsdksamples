@@ -226,9 +226,7 @@ namespace Vault
         {
             vdkError error = vdkContext_KeepAlive(pContext);
             if (error != vdkError.vE_Success)
-            {
                 throw new Exception("Unable to keep session alive: " + error.ToString());
-            }
         }
 
         public void Try_Resume(string pURL, string pApplicationName, string pUsername, bool tryDongle)
@@ -599,4 +597,3 @@ namespace Vault
         private static extern vdkError vdkConvert_DoConvert(IntPtr pConvertContext);
     }
 }
-
