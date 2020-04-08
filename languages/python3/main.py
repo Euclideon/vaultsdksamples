@@ -12,7 +12,7 @@ from sys import argv
 SDKPath = abspath("./vaultSDK")
 vault.LoadVaultSDK(SDKPath)
 vaultSDK = vault.vaultSDK
-    
+
 
 modelFile = abspath("../../samplefiles/DirCube.uds")
 outFile = abspath("./tmp.png")
@@ -22,8 +22,6 @@ serverPath = "https://earth.vault.euclideon.com"
 userName = "Username"
 userPass = "Password"
 
-
-
 width = 1280
 height = 720
 #array of 32 bit ARGB pixels:
@@ -32,13 +30,13 @@ colourBuffer = (c_int * width * height)()
 depthBuffer = (c_float * width * height)()
 
 #the camera matrix using left handed GL convention (i.e. last row is translation)
-cameraMatrix = [1,0,0,0,
-                0,1,0,0,
-                0,0,1,0,
-                0,-5,0,1]
+cameraMatrix = [1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, -5, 0, 1]
 
 if __name__ == "__main__":
-    
+
     if len(argv) >= 3:
         userName = argv[1]
         userPass = argv[2]

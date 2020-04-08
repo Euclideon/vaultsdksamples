@@ -1,3 +1,4 @@
+import math
 from ctypes import *
 from enum import IntEnum, unique
 import platform
@@ -28,14 +29,14 @@ def LoadVaultSDK(SDKPath):
     SDKPath = os.environ.get("VAULTSDK_HOME")
     if SDKPath==None:
         raise FileNotFoundError("Environment variable VAULTSDK_HOME not set, please refer to Vault SDK documentation")
-        
+
     if platform.system() == 'Windows':
         SDKPath +="/lib/win_x64/vaultSDK"
 
     #TODO Add support for these paths:
     #elif platform.system() == "Linux":
     #    print("Platform not supported")
-        
+
     #elif platform.system() == "Darwin":
     #    print("Platform not supported"
     else:
@@ -155,8 +156,10 @@ class vdkRenderContext:
     self.vdkRenderContext_Destroy = getattr(vaultSDK, "vdkRenderContext_Destroy")
     self.vdkRenderContext_Render = getattr(vaultSDK, "vdkRenderContext_Render")
     self.renderer = c_void_p(0)
+    self.context = None
 
   def Create(self, context):
+    self.context = context
     _HandleReturnValue(self.vdkRenderContext_Create(context.context, byref(self.renderer)))
 
   def Destroy(self):
@@ -170,15 +173,69 @@ class vdkRenderContext:
     _HandleReturnValue(self.vdkRenderContext_Render(self.renderer, renderView.renderView, renderInstances, len(models), c_void_p(0)))
 
 class vdkRenderView:
-  def __init__(self):
+  def __init__(self, width=1280, height=720, clearColour=0, context=None, renderContext=None):
     self.vdkRenderView_Create = getattr(vaultSDK, "vdkRenderView_Create")
     self.vdkRenderView_Destroy = getattr(vaultSDK, "vdkRenderView_Destroy")
     self.vdkRenderView_SetTargets = getattr(vaultSDK, "vdkRenderView_SetTargets")
     self.vdkRenderView_SetMatrix = getattr(vaultSDK, "vdkRenderView_SetMatrix")
     self.renderView = c_void_p(0)
 
+    self.width = width
+    self.height = height
+    self.clearColour = clearColour
+    self.context = context
+    self.renderContext = renderContext
+    #if the contexts are not set we assume the user is setting them manually
+    if context is None or renderContext is None:
+      return
+
+
+    #these are initialised when setting the size:
+    self.colourBuffer = None
+    self.depthBuffer = None
+    self.set_size()
+
+    self.cameraMatrix = None
+    self.set_view()
+
+
+  def set_view(self, x=0, y=-5, z=0, roll=0, pitch=0,yaw=0):
+    sy = math.sin(yaw)
+    cy = math.cos(yaw)
+    sp = math.sin(pitch)
+    cp = math.cos(pitch)
+    sr = math.sin(roll)
+    cr = math.cos(roll)
+    self.cameraMatrix = [
+        cy*cp, cy*sp*sr-sy*cr, cy*sp*cr+sy*sr, 0,
+        sy*cp, sy*sp*sr+cy*cr, sy*sp*cr-cy*sr, 0,
+        -sp, cp*sr, cp*cr, 0,
+        x, y, z, 1
+    ]
+    self.SetMatrix(vdkRenderViewMatrix.Camera, self.cameraMatrix)
+
+  def set_size(self, width=None, height=None):
+    if width is None:
+      width = self.width
+    if height is None:
+      height = self.height
+
+    self.colourBuffer = (c_int32 * width * height)()
+    self.depthBuffer = (c_float * width * height)()
+    if self.context is not None and self.renderContext is not None:
+      self.Create(self.context, self.renderContext, width, height)
+      self.SetTargets(self.colourBuffer, self.clearColour, self.depthBuffer)
+    else:
+      raise Exception("Context and renderer must be created before calling set_size")
+
   def Create(self, context, vaultRenderer, width, height):
-    _HandleReturnValue(self.vdkRenderView_Create(context.context, byref(self.renderView), vaultRenderer.renderer, width, height))
+    self.context = context
+    self.renderContext = vaultRenderer
+    self.width = width
+    self.height = height
+    if self.renderView is not c_void_p(0):
+      self.Destroy()
+    _HandleReturnValue(self.vdkRenderView_Create(vaultRenderer.context.context, byref(self.renderView), vaultRenderer.renderer, width, height))
 
   def Destroy(self):
     _HandleReturnValue(self.vdkRenderView_Destroy(byref(self.renderView)))
