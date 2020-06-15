@@ -23,6 +23,7 @@ public class vdkCameraOptions : MonoBehaviour
             cam = Camera.main;
         }
     }
+    
     void Start()
     {
         optionsStruct.setPick(0, 0);

@@ -5,7 +5,7 @@ using UnityEngine;
 using Vault;
 
 /*
- *Loads all uds files in a local path and places them in the world space relative to the first
+ * Loads all UDS files in a local path and places them in the world space relative to the first
  * Intended for multi part uds files
  */
  
@@ -47,8 +47,8 @@ public class loadAllUDSInDirectory : MonoBehaviour
                     ++baseInd;
                 continue;
             }
-            if (i == baseInd)
-            {//reference all models to the first 
+            if (i == baseInd) //reference all models to the first 
+            {
                 rootBaseOffset = model.header.baseOffset;
             }
             model.geolocationOffset =
