@@ -299,7 +299,13 @@ public class VDKCollider : MonoBehaviour
         Matrix4x4 projection = Matrix4x4.Ortho(-width / 2, width / 2, height / 2, -height / 2, zNear, zFar);
         renderView.SetMatrix(Vault.RenderViewMatrix.Projection, UDUtilities.GetUDMatrix(projection));
         RenderOptions options = new RenderOptions();
-        GlobalVDKContext.renderer.Render(renderView, modelArray, modelArray.Length, options);
+        try
+        {
+            GlobalVDKContext.renderer.Render(renderView, modelArray, modelArray.Length, options);
+        }
+        catch (Exception e){
+            Debug.Log("VDK dropped frame: " + e.ToString());
+        }
         MakeSheetMesh(width, height, (int)widthPix, (int)heightPix, depthBuffer);
     }
 

@@ -34,15 +34,15 @@ namespace Vault
                 {
                     Debug.Log("Attempting to resume Euclideon Vault session");
                     vContext.Try_Resume(vaultServer, "Unity", vaultUsername, true);
-                    vContext.RequestLicense(LicenseType.Render);
+                    //vContext.RequestLicense(LicenseType.Render);
                     isCreated = true;
                     Debug.Log("Resume Succeeded");
                 }
-                catch (System.Exception e)
+                catch 
                 {
-                    Debug.Log(e.ToString() + "Logging in to Euclideon Vault server");
+                    Debug.Log("Logging in to Euclideon Vault server");
                     GlobalVDKContext.vContext.Connect(vaultServer, "Unity", vaultUsername, vaultPassword);
-                    vContext.RequestLicense(LicenseType.Render);
+                    //vContext.RequestLicense(LicenseType.Render);
                     GlobalVDKContext.isCreated = true;
                     Debug.Log("Logged in!");
                 }

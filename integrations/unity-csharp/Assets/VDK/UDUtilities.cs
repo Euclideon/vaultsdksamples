@@ -89,13 +89,17 @@ namespace Vault
      */
     public class VDKSessionThreadManager {
         bool logLicenseInformation = false;
+        bool keepAlive = false;//Only necessary prior to vdk0.6 as this functionaity has been moved to library
         Thread keepAliveThread;
         Thread licenseLogThread;
         List<Thread> activeThreads = new List<Thread>();
         public VDKSessionThreadManager() {
-            keepAliveThread = new Thread(new ThreadStart(KeepAlive));
-            keepAliveThread.Start();
-            activeThreads.Add(keepAliveThread);
+            if(keepAlive)
+            {
+              keepAliveThread = new Thread(new ThreadStart(KeepAlive));
+              keepAliveThread.Start();
+              activeThreads.Add(keepAliveThread);
+            }
             if (logLicenseInformation)
             {
                 licenseLogThread = new Thread(new ThreadStart(LogLicenseStatus));

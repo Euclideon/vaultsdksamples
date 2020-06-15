@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace Vault
 {
@@ -199,15 +200,19 @@ namespace Vault
     {
         ~vdkContext()
         {
-            if (pContext != IntPtr.Zero)
-                Disconnect();
+            if (pContext != IntPtr.Zero) {
+                //this does not need to be called currently:
+                //Disconnect();
+
+            }
+                
         }
 
         public void Connect(string pURL, string pApplicationName, string pUsername, string pPassword)
         {
-            vdkError error = vdkContext_Connect(ref pContext, pURL, pApplicationName, pUsername, pPassword);
+            vdkError error = vdkContext.vdkContext_TryResume(ref pContext, pURL, pApplicationName, pUsername, true);
             if (error != vdkError.vE_Success)
-                error = vdkContext.vdkContext_TryResume(ref pContext, pURL, pApplicationName, pUsername, true);
+                error = vdkContext_Connect(ref pContext, pURL, pApplicationName, pUsername, pPassword);
             if (error == Vault.vdkError.vE_ConnectionFailure)
                 throw new Exception("Could not connect to server.");
             else if (error == Vault.vdkError.vE_AuthFailure)
@@ -240,9 +245,9 @@ namespace Vault
                 throw new Exception("Unable to keep session alive: " + error.ToString());
             }
         }
-        public void Disconnect()
+        public void Disconnect(bool endSession=false)
         {
-            vdkError error = vdkContext_Disconnect(ref pContext);
+            vdkError error = vdkContext_Disconnect(ref pContext, endSession);
             if (error != Vault.vdkError.vE_Success)
                 throw new Exception("vdkContext.Disconnect failed.");
         }
@@ -277,7 +282,7 @@ namespace Vault
         [DllImport("vaultSDK")]
         private static extern vdkError vdkContext_Connect(ref IntPtr ppContext, string pURL, string pApplicationName, string pUsername, string pPassword);
         [DllImport("vaultSDK")]
-        private static extern vdkError vdkContext_Disconnect(ref IntPtr ppContext);
+        private static extern vdkError vdkContext_Disconnect(ref IntPtr ppContext, bool endSession);
         [DllImport("vaultSDK")]
         private static extern vdkError vdkContext_RequestLicense(IntPtr pContext, LicenseType licenseType);
         [DllImport("vaultSDK")]
@@ -342,7 +347,7 @@ namespace Vault
 
             if (error != Vault.vdkError.vE_Success)
             {
-                throw new Exception("vdkRenderContext.Render failed: " + error.ToString());
+                Debug.Log("vdkRenderContext.Render failed: " + error.ToString());
             }
             options.pickRendered = true;
         }
