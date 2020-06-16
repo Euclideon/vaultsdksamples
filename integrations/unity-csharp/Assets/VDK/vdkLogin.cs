@@ -11,10 +11,12 @@ namespace Vault
         public static bool isCreated = false;
         public static vdkContext vContext = new vdkContext();
         public static vdkRenderContext renderer = new vdkRenderContext();
+        public static Dictionary<Camera, vdkRenderOptions> optionList = new Dictionary<Camera, vdkRenderOptions>();
+        public static VDKSessionThreadManager sessionKeeper = new VDKSessionThreadManager();
         public static string vaultServer = "https://earth.vault.euclideon.com";
-        public static string vaultUsername = ""; // leave empty
+        public static string vaultUsername = ""; // Add credentials here for build
         
-        public static string vaultPassword = ""; // leave empty
+        public static string vaultPassword = ""; // Add credentials here for build
 
         // These strings exist to ensure during development no typo or error is ever set regarding the saving/loading/reading of 
         // .. usernames and passwords.
@@ -22,10 +24,17 @@ namespace Vault
         public static string SavedPasswordKey = "VDKPassword";
         public static void Login()
         {
-            // Using editor prefs unfortunatly
+            // Playerprefs set from the toolbar VDK menu
+             //vaultUsername = PlayerPrefs.GetString(SavedUsernameKey);
+             //vaultPassword = PlayerPrefs.GetString(SavedPasswordKey);
+
+            // No longer using player prefs as they save to disk persistantly
+#if UNITY_EDITOR
+                        
             vaultUsername = EditorPrefs.GetString(SavedUsernameKey);
             vaultPassword = EditorPrefs.GetString(SavedPasswordKey);
-
+#endif
+            Debug.Log("Attempting to login with: " + vaultUsername + " / " + vaultPassword);
             if (!GlobalVDKContext.isCreated)
             {
                 try
@@ -45,7 +54,7 @@ namespace Vault
                     Debug.Log("Logged in!");
                 }
             }
-            renderer.Create(vContext);
+            renderer.Create(vContext); // Maybe not call here? Throws errors in editor
         }
     }
 }

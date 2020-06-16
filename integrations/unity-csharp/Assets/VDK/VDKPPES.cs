@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
 using Vault;
+using System.Runtime.InteropServices;
 
 [Serializable]
 [PostProcess(typeof(VDKPPER), PostProcessEvent.BeforeTransparent, "VDK/VDKPPES")]
@@ -81,8 +82,28 @@ public sealed class VDKPPER : PostProcessEffectRenderer<VDKPPES>
             vRenderView.SetMatrix(Vault.RenderViewMatrix.View, UDUtilities.GetUDMatrix(cam.worldToCameraMatrix));
             vRenderView.SetMatrix(Vault.RenderViewMatrix.Projection, UDUtilities.GetUDMatrix(cam.projectionMatrix));
 
-            GlobalVDKContext.renderer.Render(vRenderView, modelArray, modelArray.Length);
+            //interface to input render options: this allows setting of render flags, picking and filtering from unity objects attached to the camera
+            vdkCameraOptions optionsContainer = cam.GetComponent<vdkCameraOptions>();
+            RenderOptions options;
+            if (optionsContainer != null)
+            {
+                options = optionsContainer.optionsStruct;
+            }
+            else
+            {
+                options = new RenderOptions();
 
+                // The above comment block has been left for safety, and without user defined tags will always execute the following 2 lines
+                optionsContainer = null;
+                options = new RenderOptions();
+            }
+
+            GlobalVDKContext.renderer.Render(vRenderView, modelArray, modelArray.Length, options);
+
+            //pass the depth buffer back to the unity interface for further processing:
+            if (optionsContainer != null && optionsContainer.recordDepthBuffer) 
+              optionsContainer.setDepthImageFromZ(depthBuffer);//for as yet unimplemented features
+            
             //make sure that the textures exist before operating on them
             if (colourTexture == null || depthTexture == null)
                 InitialiseTextures();

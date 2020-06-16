@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System;
 using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
+#endif
 using Vault;
 
 
@@ -11,11 +13,11 @@ using Vault;
 namespace vdk
 {
 
-
+#if UNITY_EDITOR
 
     public class VDKUserInfoEditor : EditorWindow
     {
-        [MenuItem("VDK/Set user Info")]
+        [MenuItem("VDK/Login")]
 
         public static void ShowWindow()
         {
@@ -29,12 +31,12 @@ namespace vdk
         private static void ShowWindow()
         {
             var window = GetWindow<VDKUserInput>();
-            window.titleContent = new GUIContent("VDK User Info");
+            window.titleContent = new GUIContent("newWindow");
             window.Show();
 
         }
 
-        // Load details
+        // Load username
         private void Awake()
         {
             LoadUserInfo();
@@ -56,8 +58,7 @@ namespace vdk
         // Strings used to store the entered info
         private string usernameEntry;
         private string passwordEntry;
-        
-        private string SuccessMessage ="";
+        private bool saveToDisk = false;
 
         private void OnGUI()
         {
@@ -74,8 +75,7 @@ namespace vdk
             BottomButton.alignment = TextAnchor.LowerCenter;
 
             // Drawing the GUI elements
-            EditorGUILayout.LabelField("VDK Save user Info", CenteredBold);
-            EditorGUILayout.LabelField("Once your details are saved, hit play to run your scene"); 
+            EditorGUILayout.LabelField("VDK Login", CenteredBold);
 
             // Username and password
             EditorGUILayout.LabelField("Username:");
@@ -83,7 +83,7 @@ namespace vdk
             EditorGUILayout.LabelField("Password:");
             passwordEntry = EditorGUILayout.PasswordField(passwordEntry);
 
-            bool pressed = GUILayout.Button("Save User Info");
+            bool pressed = GUILayout.Button("Confirm");
 
             EditorGUILayout.LabelField("*WARNING* these details are saved to your computer in plaintext");
 
@@ -92,21 +92,11 @@ namespace vdk
 
             bool clearInfo = GUILayout.Button("Remove saved info", BottomButton);
 
-            // This GUILable is just for visual confirmation the user has done something
-            // .. and really should hook directly into Vault API authentication for a true retrun success/error message
-            EditorGUILayout.LabelField(SuccessMessage); 
-
-
             // Commit the user info in several ways.
             if (pressed || e.keyCode == KeyCode.Return || e.keyCode == KeyCode.KeypadEnter)
             {
                 // Save user info
                 CommitUserInfo();
-
-                // Idealy the VDK would begin rendering here in the scene view, but I'm unsure if .Login() was built for this purpose
-                // GlobalVDKContext.Login();
-
-                SuccessMessage = "User successfully saved!";
             }
 
             // wipe the users info
@@ -139,5 +129,5 @@ namespace vdk
             
         }
     }
-
+#endif
 }
