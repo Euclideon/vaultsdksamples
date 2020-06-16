@@ -37,7 +37,15 @@ public class VDKCollider : MonoBehaviour
     [Tooltip("Turns on smoothing of collider surface")]
     public bool laplacianSmoothing = false;
     [Tooltip("Determines if the collider rotates with the body of the target object")]
-    public bool lockRotationToBody = false;
+    public LockRotationToBody lockRotationToBody;
+    public Vector3 bodyLockOffset = new Vector3( 0, 0, 0);
+    [System.Serializable]
+    public class LockRotationToBody {
+        public bool x = false;
+        public bool y = false;
+        public bool z = false;
+    };
+
 
     public float[] depthBuffer;
     private Color32[] colourBuffer;
@@ -45,10 +53,6 @@ public class VDKCollider : MonoBehaviour
     {
         SetRenderView();
         Update();
-        
-    }
-    void Start()
-    {
     }
 
     /*
@@ -56,7 +60,7 @@ public class VDKCollider : MonoBehaviour
      */
     float zBufferToDepth(float z)
     {
-        return (z * 0.5f + 0.5f) * (zFar - zNear) + zNear;
+        return UDUtilities.zBufferToDepth(z, zNear, zFar);
     }
 
     /*
@@ -153,7 +157,6 @@ public class VDKCollider : MonoBehaviour
      */
     private Vector3[] LaplacianSmooth(Vector3[] verts, int numVertsX, int numVertsY)
     {
-
         Vector3[] newVerts = new Vector3[numVertsX * numVertsY];
         for (int i = 0; i < numVertsY; i++)
         {
@@ -258,27 +261,23 @@ public class VDKCollider : MonoBehaviour
         Vector3 offset;
         if (followTarget != null)
         {
-            if (lockRotationToBody)
-                offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
-            else
-                offset = Matrix4x4.Rotate(followTarget.transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
+            Vector3 newRot = transform.rotation.eulerAngles;
+            if (lockRotationToBody.x)
+                newRot.x = followTarget.transform.eulerAngles.x + this.bodyLockOffset.x;
 
-            if (threshholdFollow)
+            if (lockRotationToBody.y)
+                newRot.y = followTarget.transform.eulerAngles.y + this.bodyLockOffset.y;
+
+            if (lockRotationToBody.z)
+                newRot.z = followTarget.transform.eulerAngles.z +this.bodyLockOffset.z;
+
+            transform.eulerAngles = newRot;
+            offset = Matrix4x4.Rotate(transform.rotation) * new Vector4(watcherPos.x, watcherPos.y, watcherPos.z);
+            bool thresholdTrigger = (this.transform.position - followTarget.transform.position).magnitude > followThreshold;
+            if (!threshholdFollow || thresholdTrigger)
             {
-                if ((this.transform.position - followTarget.transform.position).magnitude > followThreshold)
-                {
-                    this.transform.position = followTarget.transform.position + offset;
-                    UpdateView();
-                    if(lockRotationToBody)
-                      this.transform.rotation = followTarget.transform.rotation;
-                }
-            }
-            else
-            {
-                this.transform.position = followTarget.transform.position + offset;//+followTarget.transform.TransformVector(watcherPos);
+                this.transform.position = followTarget.transform.position + offset;
                 UpdateView();
-                if(lockRotationToBody)
-                  this.transform.rotation = followTarget.transform.rotation;
             }
         }
         else
@@ -299,7 +298,14 @@ public class VDKCollider : MonoBehaviour
         renderView.SetMatrix(Vault.RenderViewMatrix.Camera, frontPlaneView);
         Matrix4x4 projection = Matrix4x4.Ortho(-width / 2, width / 2, height / 2, -height / 2, zNear, zFar);
         renderView.SetMatrix(Vault.RenderViewMatrix.Projection, UDUtilities.GetUDMatrix(projection));
-        GlobalVDKContext.renderer.Render(renderView, modelArray, modelArray.Length);
+        RenderOptions options = new RenderOptions();
+        try
+        {
+            GlobalVDKContext.renderer.Render(renderView, modelArray, modelArray.Length, options);
+        }
+        catch (Exception e){
+            Debug.Log("VDK dropped frame: " + e.ToString());
+        }
         MakeSheetMesh(width, height, (int)widthPix, (int)heightPix, depthBuffer);
     }
 
