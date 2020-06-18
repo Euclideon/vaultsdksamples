@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using UnityEditor;
 #if UNITY_EDITOR
@@ -58,7 +58,7 @@ namespace vdk
         // Strings used to store the entered info
         private string usernameEntry;
         private string passwordEntry;
-        private bool saveToDisk = false;
+        //private bool saveToDisk = false;
 
         private void OnGUI()
         {

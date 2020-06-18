@@ -11,7 +11,7 @@ using Vault;
  
 public class loadAllUDSInDirectory : MonoBehaviour
 {
-    public string path;
+    public string path = "";
     public bool reload = false;
     void Start()
     {

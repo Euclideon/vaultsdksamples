@@ -205,7 +205,7 @@ namespace Vault
                 //Disconnect();
 
             }
-                
+
         }
 
         public void Connect(string pURL, string pApplicationName, string pUsername, string pPassword)
@@ -245,7 +245,7 @@ namespace Vault
                 throw new Exception("Unable to keep session alive: " + error.ToString());
             }
         }
-        public void Disconnect(bool endSession=false)
+        public void Disconnect(bool endSession = false)
         {
             vdkError error = vdkContext_Disconnect(ref pContext, endSession);
             if (error != Vault.vdkError.vE_Success)
@@ -467,9 +467,9 @@ namespace Vault
             options.flags = flags;
         }
 
-        public RenderOptions() :this(vdkRenderContextPointMode.vdkRCPM_Rectangles,vdkRenderFlags.vdkRF_None)
+        public RenderOptions() : this(vdkRenderContextPointMode.vdkRCPM_Rectangles, vdkRenderFlags.vdkRF_None)
         {
-            
+
         }
 
         public void setPick(uint x, uint y)
@@ -494,7 +494,7 @@ namespace Vault
                 if (!pickRendered)
                     throw new Exception("Render must be called before pick can be read");
 
-                pick = *( (vdkRenderPicking *) options.pPick.ToPointer());
+                pick = *((vdkRenderPicking*)options.pPick.ToPointer());
                 return pick;
             }
         }
@@ -502,7 +502,7 @@ namespace Vault
         unsafe public UnityEngine.Vector3 PickLocation()
         {
             vdkRenderPicking pick = this.Pick;
-            return new UnityEngine.Vector3((float)pick.pointCenter[0],(float)pick.pointCenter[1],(float)pick.pointCenter[2]);
+            return new UnityEngine.Vector3((float)pick.pointCenter[0], (float)pick.pointCenter[1], (float)pick.pointCenter[2]);
         }
 
         public vdkRenderOptions Options {
@@ -608,6 +608,12 @@ namespace Vault
 
         [DllImport("vaultSDK")]
         private static extern vdkError vdkConvert_DoConvert(IntPtr pConvertContext);
+    }
+
+    public class VDKException: Exception
+    {
+        public vdkError value;
+
     }
 }
 
