@@ -1,3 +1,5 @@
+> This repository is no longer active after the migration from Vault SDK to udSDK. Please use the [udSDKSamples](https://github.com/Euclideon/udSDKSamples) moving forward.
+
 # Euclideon Vault SDK Samples
 
 This is the repository for Euclideon Vault SDK Sample Projects.
